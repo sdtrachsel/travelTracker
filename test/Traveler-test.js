@@ -4,14 +4,14 @@ import Traveler from '../src/Traveler'
 import TravelerRepository from '../src/TravelerRepository';
 import sampleTravelers from './data/TravelerRepository-testData';
 
-describe('Travler', function () {
+describe('Traveler', function () {
     let testRepository;
     let testTraveler;
     
 
     beforeEach('data creation', () => {
         testRepository = new TravelerRepository(sampleTravelers);
-        testTraveler = new Traveler(repository.findTravelerById(4))
+        testTraveler = new Traveler(testRepository.findTravelerById(4))
     });
 
     it('should be a function', function () {
