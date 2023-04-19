@@ -262,7 +262,7 @@ const traveler44Trips = [
         "status": "approved",
         "suggestedActivities": []
     },
-    {
+      {
         "id": 6,
         "userID": 44,
         "destinationID": 35,
@@ -272,7 +272,7 @@ const traveler44Trips = [
         "status": "approved",
         "suggestedActivities": []
     },
-    {
+     {
         "id": 3,
         "userID": 44,
         "destinationID": 22,
@@ -282,7 +282,7 @@ const traveler44Trips = [
         "status": "approved",
         "suggestedActivities": []
     },
-    {
+      {
         "id": 13,
         "userID": 44,
         "destinationID": 12,
@@ -319,6 +319,26 @@ const traveler44Pending = [
 
 const traveler44Approved = [
     {
+        "id": 20,
+        "userID": 44,
+        "destinationID": 19,
+        "travelers": 4,
+        "date": "2022/10/05",
+        "duration": 6,
+        "status": "approved",
+        "suggestedActivities": []
+    },
+    {
+        "id": 1,
+        "userID": 44,
+        "destinationID": 49,
+        "travelers": 1,
+        "date": "2022/09/16",
+        "duration": 8,
+        "status": "approved",
+        "suggestedActivities": []
+    },
+      {
         "id": 6,
         "userID": 44,
         "destinationID": 35,
@@ -328,7 +348,7 @@ const traveler44Approved = [
         "status": "approved",
         "suggestedActivities": []
     },
-    {
+     {
         "id": 3,
         "userID": 44,
         "destinationID": 22,
@@ -338,7 +358,7 @@ const traveler44Approved = [
         "status": "approved",
         "suggestedActivities": []
     },
-    {
+      {
         "id": 13,
         "userID": 44,
         "destinationID": 12,
