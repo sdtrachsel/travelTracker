@@ -6,17 +6,24 @@ import Traveler from './Traveler'
 import Trip from './Trip'
 import Destination from './Destination';
 
-
-
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
+
+
+// Selectors
+const landingPage = document.getElementById('landingDisplay');
+const upcomingPage = document.getElementById('upcomingDisplay');
+const pastPage = document.getElementById('pastDisplay');
+const desinationPage = document.getElementById('destinationsDisplay');
+const bookTripPage = document.getElementById('bookTripDisplay');
 
 let allTravelers;
 let allDestinations;
 let currentUser;
 let currentUserTrips;
 
+// Listeners
 window.addEventListener('load', () => {
     getLoadData()
         .then(data => {
