@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Trip from '../src/Trip'
-import { sampleTrips, traveler44Trips, traveler44Pending, traveler44Approved, traveler44AfterAdd, traveler19Trips, traveler19Pending, traveler19Approved } from './data/Trip-testData';
+import { sampleTrips, traveler44Trips, traveler44Pending, traveler44Approved, traveler44AfterAdd, traveler19Trips, traveler19Pending, traveler19Approved } from './Trip-testData';
 
 describe('Trip', function () {
     let tiffyTravelerInfo, tiffyTrip, hamTravelerInfo, hamTrip;

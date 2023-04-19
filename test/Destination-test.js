@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Destination from '../src/Destination'
-import sampleDestinations from './data/Destination-testData';
+import sampleDestinations from './Destination-testData';
 
 describe('Destination', function () {
     let testDestinations;

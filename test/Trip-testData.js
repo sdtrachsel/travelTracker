@@ -523,4 +523,4 @@ const traveler19Approved = [
     }
 ];
 
-export default { sampleTrips, traveler44Trips, traveler44Pending, traveler44Approved,traveler44AfterAdd, traveler19Trips, traveler19Pending, traveler19Approved };
+export { sampleTrips, traveler44Trips, traveler44Pending, traveler44Approved,traveler44AfterAdd, traveler19Trips, traveler19Pending, traveler19Approved };

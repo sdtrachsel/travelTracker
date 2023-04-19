@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import TravelerRepository from '../src/TravelerRepository';
-import sampleTravelers from './data/TravelerRepository-testData';
+import sampleTravelers from './TravelerRepository-testData';
 
 
 describe('Travler Repository', function () {
@@ -19,12 +19,12 @@ describe('Travler Repository', function () {
         expect(repository).to.be.an.instanceof(TravelerRepository);
     });
 
-    it.skip('should store a repositories of travelers', function () {
+    it('should store a repositories of travelers', function () {
         expect(repository.travelers).to.deep.equal(sampleTravelers)
     });
 
-    it.skip('should find a travler by the traveler id', function () {
-        expect(repository.findTravelerById(4)).to.deep.equal({
+    it('should find a travler by the traveler id', function () {
+        expect(repository.findTravelerById(5)).to.deep.equal({
             "id": 5,
             "name": "Tiffy Grout",
             "travelerType": "thrill-seeker"
@@ -36,12 +36,12 @@ describe('Travler Repository', function () {
         });
     });
 
-    it.skip('should let you know if a traveler is not found when searching by ID', function () {
+    it('should let you know if a traveler is not found when searching by ID', function () {
         expect(repository.findTravelerById(14)).to.be.equal('No traveler found with that id');
         expect(repository.findTravelerById(26)).to.be.equal('No traveler found with that id');
     });
 
-    it.skip('should find a traveler by the traveler name', function () {
+    it('should find a traveler by the traveler name', function () {
         expect(repository.findTravelerByName('Rachael Vaughten')).to.deep.equal({
             "id": 2,
             "name": "Rachael Vaughten",
@@ -54,8 +54,8 @@ describe('Travler Repository', function () {
         });
     });
 
-    it.skip('should let you know if a traveler is not found when searching by name', function () {
-        expect(repository.findTravlerByName('Rocky Balboa')).to.be.equal('No traveler found by that name');
-        expect(repository.findTravlerByName('Niel Armstrong')).to.be.equal('No traveler found by that name');
+    it('should let you know if a traveler is not found when searching by name', function () {
+        expect(repository.findTravelerByName('Rocky Balboa')).to.be.equal('No traveler found by that name');
+        expect(repository.findTravelerByName('Niel Armstrong')).to.be.equal('No traveler found by that name');
     });
 });
