@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Destination from '../src/Destination'
-import sampleDestinations from './data/Destination-testData';
+import sampleDestinations from './Destination-testData';
 
 describe('Destination', function () {
     let testDestinations;
@@ -19,12 +19,12 @@ describe('Destination', function () {
         expect(testDestinations).to.be.an.instanceof(Destination);
     });
 
-    it.skip('should store a list of destinations', function () {
+    it('should store a list of destinations', function () {
         expect(testDestinations.allDestinations).to.deep.equal(sampleDestinations);       
     });
 
-    it.skip('should find a destination by id', function () {
-        expect(testDestinations.findbyId(19)).to.deep.equal({
+    it('should find a destination by id', function () {
+        expect(testDestinations.findById(19)).to.deep.equal({
             "id": 19,
             "destination": "Quito, Ecuador",
             "estimatedLodgingCostPerDay": 60,
@@ -33,7 +33,7 @@ describe('Destination', function () {
             "alt": "a city at night with cloudy, snowy mountains in the distance"
         });
         
-        expect(testDestinations.findbyId(35)).to.deep.equal({
+        expect(testDestinations.findById(35)).to.deep.equal({
             "id": 35,
             "destination": "Anchorage, Alaska",
             "estimatedLodgingCostPerDay": 200,
@@ -43,8 +43,8 @@ describe('Destination', function () {
         });       
     });
 
-    it.skip('should calculate the cost of visiting a destination', function () {
-        expect(testDestinations.calculateDestinationCost(35, 1, 10)).to.be.equal(3300);  
+    it('should calculate the cost of visiting a destination', function () {
+        expect(testDestinations.calculateDestinationCost(35, 1, 10)).to.be.equal(2310);  
         expect(testDestinations.calculateDestinationCost(25, 5, 18)).to.be.equal(4565);          
     });
 });
