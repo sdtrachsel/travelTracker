@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Travel Tracker</title>
 </head>
-<body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
 
+<body>
+  <div class="wrapper">
+    <nav>
+      <div class="profile">
+        <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
+        <p id="userName"></p>
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="viewHomeBtn">Home</button>
+        <button class="nav-btn" id="viewPastBtn">Past Trips</button>
+        <button class="nav-btn"id="viewPlanTripBtn">Plan Your Next Trip</button>
+      </div>
+    </nav>
+    <main>
+      <section id="homeDisplay">
+        <!-- landing -->
+      </section>
+      <section class="hidden" id="pastDisplay">
+        <!-- past -->
+      </section>
+      <section class="hidden" id="planTripDisplay">
+        <!-- catalog -->
+      </section>
+      <section class="hidden" id="bookTripDisplay">
+        <!-- book form -->
+      </section>
+    </main>
+  </div>
+  <script src="bundle.js"></script>
 </body>
+
 </html>
