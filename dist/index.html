@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <div class="wrapper">
+  <div class="wrapper" id="displayArea">
     <nav>
       <div class="profile">
         <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
@@ -18,24 +18,53 @@
       <div class="nav-btns">
         <button class="nav-btn" id="viewHomeBtn">Home</button>
         <button class="nav-btn" id="viewPastBtn">Past Trips</button>
-        <button class="nav-btn"id="viewPlanTripBtn">Plan Your Next Trip</button>
+        <button class="nav-btn" id="viewPlanTripBtn">Plan Your Next Trip</button>
       </div>
     </nav>
     <main>
-      <section id="homeDisplay">
-        <!-- landing -->
+      <section class="page" id="homeDisplay">
+        <h1 id="greeting"> Welcome </h1>
+        <p>Check out your upcoming trips</p>
+        <table id="upcomingTrps">
+        </table>
+        <p id="totalSpent"></p>
       </section>
-      <section class="hidden" id="pastDisplay">
-        <!-- past -->
+      <section class="page hidden" id="pastDisplay">
+        <table id="pastTrps">
+        </table>
       </section>
-      <section class="hidden" id="planTripDisplay">
-        <!-- catalog -->
-      </section>
-      <section class="hidden" id="bookTripDisplay">
-        <!-- book form -->
+      <section class="page plan-display hidden" id="planTripDisplay">
+        <h2>Choose Your Next Destination</h2>
+        <section class="destination-listings" id="destinationCards">
+          <!-- destination cards -->
+        </section>
       </section>
     </main>
   </div>
+  <section class="book-form hidden" id="bookTripFormDisplay">
+    <form id="bookTripForm">
+      <fieldset>
+        <legend class="book-form-title">Book Your Trip</legend>
+
+        <label for="formDestination" autocomplete="off">Destination:</label>
+        <input type="text" id="formDestination" name="destination" required>
+
+        <label for="formDate" autocomplete="off">Date:</label>
+        <input type="date" id="formDate" name="date" required>
+
+        <label for="formDate" autocomplete="off">Duration:</label>
+        <input type="number" id="formDate" name="date" min="1" max="50" required>
+
+        <label for="formTravelers" autocomplete="off">Number of Travelers:</label>
+        <input type="number" id="formTravelers" name="travelers" min="1" max="50" required>
+
+        <p class="required">(all fields required)</p>
+        <input class="book-submit" type="submit" value="Submit">
+        <p class="form-feedback" id="formFeedback"><!-- form feedback --></p>
+      </fieldset>
+
+    </form>
+  </section>
   <script src="bundle.js"></script>
 </body>
 

@@ -11,6 +11,21 @@ class Trip {
     findByStatus(status) {
         return this.allTrips.filter(trip => trip.status === status)
     }
+    // paramenters: upcoming or past
+    findByTense(tense){
+        const now = Date.now()
+        let trips =[];
+
+        if(tense === 'past'){
+            trips = this.allTrips.filter(trip => new Date(trip.date) < now)
+        } else{
+            trips = this.allTrips.filter(trip => new Date(trip.date) >= now)
+        }
+        
+        if(trips){
+            return trips
+        }         
+    }
 
     addNewTrip(trip) {
         this.allTrips.push(trip)
