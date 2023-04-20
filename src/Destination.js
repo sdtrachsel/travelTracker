@@ -7,6 +7,10 @@ class Destination {
         return this.allDestinations.find(destination => destination.id === id);
     }
 
+    findByName(name){
+        return this.allDestinations.find(destination => destination.destination === name)
+    }
+
     calculateDestinationCost(destId, numTavelers, duration) {
         const destination = this.allDestinations.find(destination => destination.id === destId);
 

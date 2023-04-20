@@ -42,18 +42,22 @@
     </main>
   </div>
   <section class="book-form hidden" id="bookTripFormDisplay">
+    <button class="cancel" id="cancelTripBook" type="button">X</button>
+    <section id="formDestDisplay">
+       <!-- destination display -->
+    </section>
     <form id="bookTripForm">
       <fieldset>
         <legend class="book-form-title">Book Your Trip</legend>
 
         <label for="formDestination" autocomplete="off">Destination:</label>
-        <input type="text" id="formDestination" name="destination" required>
+        <input type="text" id="formDestination" name="destination" readonly>
 
         <label for="formDate" autocomplete="off">Date:</label>
         <input type="date" id="formDate" name="date" required>
 
-        <label for="formDate" autocomplete="off">Duration:</label>
-        <input type="number" id="formDate" name="date" min="1" max="50" required>
+        <label for="formDuration" autocomplete="off">Duration:</label>
+        <input type="number" id="formDuration" name="duration" min="1" max="50" required>
 
         <label for="formTravelers" autocomplete="off">Number of Travelers:</label>
         <input type="number" id="formTravelers" name="travelers" min="1" max="50" required>
@@ -62,7 +66,7 @@
         <input class="book-submit" type="submit" value="Submit">
         <p class="form-feedback" id="formFeedback"><!-- form feedback --></p>
       </fieldset>
-
+      <!-- <button class="cancel" id="cancelTripBook" type="button">X</button> -->
     </form>
   </section>
   <script src="bundle.js"></script>
