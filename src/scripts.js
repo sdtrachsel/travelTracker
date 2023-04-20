@@ -12,6 +12,9 @@ import './images/user-profile.png'
 
 
 // Selectors
+const displayArea = document.getElementById('displayArea')
+const bookTripFormDisplay =document.getElementById('bookTripFormDisplay')
+const bookTripForm = document.getElementById('bookTripForm')
 const homePage = document.getElementById('homeDisplay');
 const pastPage = document.getElementById('pastDisplay');
 const desinationPage = document.getElementById('destinationsDisplay');
@@ -53,6 +56,7 @@ function populateUponLoad() {
     loginName.innerText = `${currentUser.travelerName}`;
     populateHomePage()
     populatePastPage()
+    populatePlanTripPage()
 }
 
 function populateHomePage() {
@@ -67,7 +71,7 @@ function populatePastPage() {
 
 
 function populatePlanTripPage() {
-    console.log('Plan Trip button clicked')
+    createDestinationCards(allDestinations.allDestinations)
 }
 
 function createTripsTable(table, tripList) {
@@ -94,13 +98,13 @@ function createTripsTable(table, tripList) {
     });
 }
 
-function updateAllTimeTripCost(){
+function updateAllTimeTripCost() {
     const total = currentUserTrips.calulateAllTimeCost(allDestinations)
 
     tripAllTime.innerText = `You have spent ${numberToDollar(total)} on all your trips.`
 }
 
-function numberToDollar(num){
+function numberToDollar(num) {
     const USDollar = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -108,22 +112,40 @@ function numberToDollar(num){
 
     const dollars = USDollar.format(num);
 
-    return dollars 
+    return dollars
 }
 
-function createDestinationCards(destinations){
+function createDestinationCards(destinations) {
     destinationCardDisplay.innerHTML = '';
 
-    destinations.forEach((destination)=> {
-        const destinationLocation = destination.split(',')
+    destinations.forEach((destination) => {
+        const destinationLocation = destination.destination.split(',')
 
         destinationCardDisplay.innerHTML += `
         <section class="dest-card">
             <h3>${destinationLocation[0]}</h3>
             <p>${destinationLocation[1]}</p>
-        </section>
-        `
-        
+            <img class="destImg" src="${destination.image}" alt="${destination.alt}">
+            <p>Lodging: ${numberToDollar(destination.estimatedLodgingCostPerDay)} per night </p>
+            <p>Flight: ${numberToDollar(destination.estimatedFlightCostPerPerson)} per person</p>
+            <button class="dest-book-btn" id="destBtn${destination.id}">Book Now</button>
+        </section>`;
     })
+
+    const destinationBtns = document.querySelectorAll('.dest-book-btn')
+
+    destinationBtns.forEach((btn)=> {
+        btn.addEventListener('click', () => {
+            displayForm(event)
+        })
+    })
+}
+
+function displayForm(event){
+    displayArea.classList.add('hidden')
+    bookTripFormDisplay.classList.remove('hidden')
+    console.log(event.target)
+
+    
 
 }

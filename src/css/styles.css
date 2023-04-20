@@ -9,6 +9,7 @@ body {
 
 }
 
+.book-form,
 .wrapper {
   border: blue 1px solid;
   align-self: center;
@@ -54,6 +55,28 @@ main {
   height: 100%;
   width: 80%;
 
+}
+
+.dest-card{
+  border: 1px purple solid;
+}
+
+.plan-display{
+  height: 100%;
+}
+
+.destination-listings{
+  border: red 1px solid;
+  height: 100%;
+ overflow: scroll;
+}
+
+.destImg{
+  height: 150px;
+}
+
+.book-form{
+  background-color: aliceblue;
 }
 
 .hidden {
