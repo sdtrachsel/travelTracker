@@ -9,25 +9,29 @@
 </head>
 
 <body>
-  <nav>
-    <!-- userlogindiv -->
-    <!-- navigationbuttons -->
-  </nav>
   <div class="wrapper">
+    <nav>
+      <div class="profile">
+        <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
+        <p id="userName"></p>
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="viewHomeBtn">Home</button>
+        <button class="nav-btn" id="viewPastBtn">Past Trips</button>
+        <button class="nav-btn"id="viewPlanTripBtn">Plan Your Next Trip</button>
+      </div>
+    </nav>
     <main>
-      <section id="landingDisplay">
+      <section id="homeDisplay">
         <!-- landing -->
       </section>
-      <section id="upcomingDisplay">
-        <!-- upcoming -->
-      </section>
-      <section id="pastDisplay">
+      <section class="hidden" id="pastDisplay">
         <!-- past -->
       </section>
-      <section id="destinationsDisplay">
+      <section class="hidden" id="planTripDisplay">
         <!-- catalog -->
       </section>
-      <section id="bookTripDisplay">
+      <section class="hidden" id="bookTripDisplay">
         <!-- book form -->
       </section>
     </main>
