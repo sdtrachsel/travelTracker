@@ -14,6 +14,7 @@ import './images/user-profile.png'
 // Selectors
 const displayArea = document.getElementById('displayArea')
 const bookTripFormDisplay =document.getElementById('bookTripFormDisplay')
+const pages = document.querySelectorAll('.page')
 const bookTripForm = document.getElementById('bookTripForm')
 const homePage = document.getElementById('homeDisplay');
 const pastPage = document.getElementById('pastDisplay');
@@ -47,10 +48,17 @@ window.addEventListener('load', () => {
         .catch(err => console.log(err))
 });
 
-viewHomeBtn.addEventListener('click', populateHomePage)
-viewPastBtn.addEventListener('click', populatePastPage)
-viewPlanTripBtn.addEventListener('click', populatePlanTripPage)
+viewHomeBtn.addEventListener('click', () => {changePage('homeDisplay')})
+viewPastBtn.addEventListener('click',() => {changePage('pastDisplay')})
+viewPlanTripBtn.addEventListener('click', () => {changePage('planTripDisplay')})
 
+
+function changePage(pageId, event){
+    pages.forEach((page)=> {
+        page.classList.add('hidden');
+    })
+    document.getElementById(pageId).classList.remove('hidden')   
+}
 
 function populateUponLoad() {
     loginName.innerText = `${currentUser.travelerName}`;
