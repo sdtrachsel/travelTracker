@@ -27,9 +27,16 @@ h1 {
   height: 350px;
 }
 
+.larger{
+  height: 350px;
+}
+
+.smaller{
+  height: 250px;
+}
+
 .font-family {
   font-weight: 800;
-
 }
 
 .book-form,
@@ -129,12 +136,15 @@ td {
 .past-head{
  margin-bottom: 20px;
 }
-.dest-card {
-  border: 1px purple solid;
-}
+
 
 .plan-display {
   height: 100%;
+}
+
+.dest-card {
+  border: 1px purple solid;
+  width: 30%
 }
 
 .destination-listings {

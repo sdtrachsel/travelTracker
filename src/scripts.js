@@ -17,6 +17,7 @@ import './images/traveler-trimmed.png'
 const displayArea = document.getElementById('displayArea')
 const bookTripFormDisplay = document.getElementById('bookTripFormDisplay')
 const pages = document.querySelectorAll('.page')
+const mainImage =document.getElementById('travelerImage')
 const viewHomeBtn = document.getElementById('viewHomeBtn');
 const viewPastBtn = document.getElementById('viewPastBtn');
 const viewPlanTripBtn = document.getElementById('viewPlanTripBtn');
@@ -79,7 +80,22 @@ function changePage(pageId) {
     pages.forEach((page) => {
         page.classList.add('hidden');
     })
+
+    if(pageId === 'planTripDisplay'){
+        changeMainImage('smaller')
+    }  else (
+        changeMainImage('larger')
+    )
     document.getElementById(pageId).classList.remove('hidden')
+}
+
+function changeMainImage(size){
+    if(size === 'larger'){
+       mainImage.classList.remove('smaller')
+    } else {
+        mainImage.classList.remove('larger')
+    }
+    mainImage.classList.add(size)
 }
 
 function populateUponLoad() {
