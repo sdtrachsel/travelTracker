@@ -5,6 +5,8 @@ import TravelerRepository from './TravelerRepository'
 import Traveler from './Traveler'
 import Trip from './Trip'
 import Destination from './Destination';
+import formFeedbackMessage from './formFeedback';
+
 
 import './images/user-profile.png'
 
@@ -141,7 +143,6 @@ function numberToDollar(num) {
     });
 
     const dollars = USDollar.format(num);
-
     return dollars
 }
 
@@ -238,23 +239,39 @@ function submitTripForm() {
         let trip = {
             id: Number(Date.now()),
             userID: currentUser.travelerID,
-            destinationID: allDestinations.findByName(formDestination.value).id,
+            destinationID: Number(formDestinationId.value),
             travelers: Number(formTravelers.value),
-            date: formDate.value,
+            date: formDate.value.split('-').join('/'),
             duration: Number(formDuration.value),
             status: 'pending',
             suggestedActivities: []
         }
 
-        console.log(trip)
+        post('trips', trip)
+            .then((json)=> {
+                currentUserTrips.addNewTrip(trip)
+                displayFormFeedback('success')
+                populateHomePage()
+                clearBookTripForm();
+            })
+            .catch(err => {
+                if (err === 422) {
+                    displayFormFeedback('allFields')
+                } else {
+                    displayFormFeedback('other')
+                }
+                clearBookTripForm();
+              });
     }
 }
 
+function displayFormFeedback(type){
+    formFeedback.innerText = formFeedbackMessage[type]
+}
 
 function validateDate() {
     const today = new Date();
     today.setHours(0, 0, 0, 0)
-    
     const recFormDate = formDate.value;
     const submittedDate = new Date(recFormDate + "T00:00:00Z");
     submittedDate.setMinutes(submittedDate.getMinutes() + submittedDate.getTimezoneOffset());
@@ -263,12 +280,10 @@ function validateDate() {
     maxDate.setFullYear(maxDate.getFullYear() + 1);
 
     if (submittedDate >= today && submittedDate <= maxDate) {
-        console.log('yayayayayayya')
         return true
     } else {
         formFeedback.innerText = 'Please enter a valid date that is within the coming year'
     }
-
 }
 
 function validateDestination() {
@@ -294,9 +309,9 @@ function validateDuration() {
 
 function validateTravelers() {
     const travelerCount = Number(formTravelers.value)
-    if (typeof travelerCount === 'number' && travelerCount <= 50 && travelerCount > 0) {
+    if (typeof travelerCount === 'number' && travelerCount <= 20 && travelerCount > 0) {
         return true
     } else {
-        formFeedback.innerText = 'Please enter a number of travelers between 0 and 50'
+        formFeedback.innerText = 'Please enter a number of travelers between 0 and 20'
     }
 }

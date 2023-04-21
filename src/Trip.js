@@ -13,12 +13,13 @@ class Trip {
     
     // paramenters: upcoming or past
     findByTense(tense){
-        const now = Date.now()
+        const now = new Date ()
+        now.setHours(0, 0, 0, 0)
         let trips =[];
 
         if(tense === 'past'){
             trips = this.allTrips.filter(trip => new Date(trip.date) < now)
-        } else{
+        } else if(tense === 'upcoming'){
             trips = this.allTrips.filter(trip => new Date(trip.date) >= now)
         }
         
