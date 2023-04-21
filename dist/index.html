@@ -42,27 +42,32 @@
     </main>
   </div>
   <section class="book-form hidden" id="bookTripFormDisplay">
+    <button class="cancel" id="cancelTripBook" type="button">X</button>
+    <section id="formDestDisplay">
+       <!-- destination display -->
+    </section>
     <form id="bookTripForm">
       <fieldset>
         <legend class="book-form-title">Book Your Trip</legend>
-
+        <p class="required">(all fields required)</p>
+        <input type="number" id="formDestinationId" name="destinationId" readonly>
+        
         <label for="formDestination" autocomplete="off">Destination:</label>
-        <input type="text" id="formDestination" name="destination" required>
+        <input type="text" id="formDestination" name="destination" readonly>
 
         <label for="formDate" autocomplete="off">Date:</label>
         <input type="date" id="formDate" name="date" required>
 
-        <label for="formDate" autocomplete="off">Duration:</label>
-        <input type="number" id="formDate" name="date" min="1" max="50" required>
-
+        <label for="formDuration" autocomplete="off">Duration:</label>
+        <input type="number" id="formDuration" name="duration" min="1" max="50" required>
+        <p id="subTotal"></p>
         <label for="formTravelers" autocomplete="off">Number of Travelers:</label>
         <input type="number" id="formTravelers" name="travelers" min="1" max="50" required>
 
-        <p class="required">(all fields required)</p>
+       <p id="subTotal">Subtotal: <span id="tripSubTotal"></span></p>
         <input class="book-submit" type="submit" value="Submit">
         <p class="form-feedback" id="formFeedback"><!-- form feedback --></p>
       </fieldset>
-
     </form>
   </section>
   <script src="bundle.js"></script>

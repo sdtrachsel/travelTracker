@@ -79,6 +79,10 @@ main {
   background-color: aliceblue;
 }
 
+.form-dest-img{
+  height: 125px;
+}
+
 .hidden {
   display: none;
 }
