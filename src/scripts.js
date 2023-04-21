@@ -281,8 +281,12 @@ function validateDate() {
 
     if (submittedDate >= today && submittedDate <= maxDate) {
         return true
+    } else if(submittedDate < today){
+        displayFormFeedback('dateEarly')
+    } else if (submittedDate > maxDate){
+        displayFormFeedback('dateLate')
     } else {
-        formFeedback.innerText = 'Please enter a valid date that is within the coming year'
+        displayFormFeedback('invalidDate')
     }
 }
 
@@ -294,7 +298,7 @@ function validateDestination() {
     if (destNames.includes(formDestination.value)) {
         return true
     } else {
-        formFeedback.innerText = 'Please enter a valid destination'
+        displayFormFeedback('invalidDestination')
     }
 }
 
@@ -303,7 +307,7 @@ function validateDuration() {
     if (typeof duration === 'number' && duration <= 50 && duration > 0) {
         return true
     } else {
-        formFeedback.innerText = 'Please enter a duration between 0 and 50'
+        displayFormFeedback('invalidDuration')
     }
 }
 
@@ -312,6 +316,6 @@ function validateTravelers() {
     if (typeof travelerCount === 'number' && travelerCount <= 20 && travelerCount > 0) {
         return true
     } else {
-        formFeedback.innerText = 'Please enter a number of travelers between 0 and 20'
+        displayFormFeedback('invalidTravlers')
     }
 }
