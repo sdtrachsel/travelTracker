@@ -7,14 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <title>Travel Tracker</title>
 </head>
 
 <body>
 
   <div class="wrapper" id="displayArea">
-    <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving" class="bottom-right larger" id="travelerImage">
+    <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving"
+      class="bottom-right larger" id="travelerImage">
     <nav>
       <div class="profile">
         <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
@@ -33,9 +35,10 @@
         <table id="upcomingTrps">
           <!-- upcoming trips here -->
         </table>
-        <p class="rewards">Our rewards program gives you more of what you love, <span class="emphasize">ADVENTURE!</span></p>
+        <p class="rewards">Our rewards program gives you more of what you love, <span
+            class="emphasize">ADVENTURE!</span></p>
         <p class="rewards">Speak with your travel agent about joining the Adventure Club.</p>
-        <p id="totalSpent" class="total-spent"></p>
+        <p class="total-spent">You have spent <span id="totalSpent" class="currency"></span> on all your trips.</p>
         <p class="rewards">That's a whole lot of new adventures.</p>
       </section>
       <section class="page hidden" id="pastDisplay">
@@ -52,34 +55,34 @@
     </main>
   </div>
   <section class="book-form hidden" id="bookTripFormDisplay">
-    <button class="cancel" id="cancelTripBook" type="button">X</button>
-    <section id="formDestDisplay">
-      <!-- destination display -->
-    </section>
-    <form id="bookTripForm">
-      <fieldset>
-        <legend class="book-form-title">Book Your Trip</legend>
-        <p class="required">(all fields required)</p>
-        <input type="number" id="formDestinationId" name="destinationId" readonly>
-
-        <label for="formDestination" autocomplete="off">Destination:</label>
-        <input type="text" id="formDestination" name="destination" readonly>
-
-        <label for="formDate" autocomplete="off">Date:</label>
-        <input type="date" id="formDate" name="date" required>
-
-        <label for="formDuration" autocomplete="off">Duration:</label>
-        <input type="number" id="formDuration" name="duration" min="1" max="50" required>
-        <p id="subTotal"></p>
-        <label for="formTravelers" autocomplete="off">Number of Travelers:</label>
-        <input type="number" id="formTravelers" name="travelers" min="1" max="50" required>
-
-        <p id="subTotal">Subtotal: <span id="tripSubTotal"></span></p>
-        <input class="book-submit" type="submit" value="Submit">
-        <p class="form-feedback" id="formFeedback"><!-- form feedback --></p>
-      </fieldset>
-    </form>
+    <div class="wrapper-two">
+      <div class="form-dest-display">
+        <section id="formDestCard" class="form-dest-card">
+          <!-- destination display -->
+        </section>
+      </div>
+      <form id="bookTripForm">
+        <fieldset>
+          <legend class="book-form-title">Book Your Trip</legend>
+          <p class="required-text">(all fields required)</p>
+          <input type="number" id="formDestinationId" name="destinationId" hidden readonly>
+          <label for="formDestination" autocomplete="off">Destination:</label>
+          <input type="text" id="formDestination" name="destination" readonly>
+          <label for="formDate" autocomplete="off">Date:</label>
+          <input type="date" id="formDate" name="date" required>
+          <label for="formDuration" autocomplete="off">Duration:</label>
+          <input type="number" id="formDuration" name="duration" min="1" max="50" required>
+          <label for="formTravelers" autocomplete="off">Number of Travelers:</label>
+          <input type="number" id="formTravelers" name="travelers" min="1" max="20" required>
+          <p id="subTotal" class="subtotal">Subtotal: <span id="tripSubTotal" class="trip-subtotal"></span></p>
+          <input class="book-submit" type="submit" value="Submit">
+          <p class="form-feedback" id="formFeedback"></p>
+        </fieldset>
+      </form>
+    </div>
+    <button class="cancel" id="cancelTripBook" type="button">CANCEL</button>
   </section>
+
   <script src="bundle.js"></script>
 </body>
 

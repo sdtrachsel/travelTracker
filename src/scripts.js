@@ -31,7 +31,7 @@ const cancelTripBtn = document.getElementById('cancelTripBook')
 
 //form 
 const bookTripForm = document.getElementById('bookTripForm')
-const formDestinationDisplay = document.getElementById('formDestDisplay')
+const formDestinationCard = document.getElementById('formDestCard')
 const formDestinationId = document.getElementById('formDestinationId')
 const formDestination = document.getElementById('formDestination')
 const formDate = document.getElementById('formDate')
@@ -148,7 +148,7 @@ function createTripsTable(table, tripList) {
 function updateAllTimeTripCost() {
     const total = currentUserTrips.calulateAllTimeCost(allDestinations)
 
-    tripAllTime.innerText = `You have spent ${numberToDollar(total)} on all your trips.`
+    tripAllTime.innerText = `${numberToDollar(total)}`
 }
 
 function numberToDollar(num) {
@@ -182,8 +182,8 @@ function createDestinationCards(destinations) {
             <p class="country">${destinationLocation[1]}</p>
             <img class="destImg" src="${destination.image}" alt="${destination.alt}">
             <div class="dest-details">
-            <p class="dest-detail">Lodging:\n ${numberToDollar(destination.estimatedLodgingCostPerDay)}/night</p>
-            <p class="dest-detail">Flight:\n ${numberToDollar(destination.estimatedFlightCostPerPerson)}/person</p>
+            <p class="dest-detail">Lodging:\n <span class="currency"> ${numberToDollar(destination.estimatedLodgingCostPerDay)}</span> per night</p>
+            <p class="dest-detail">Flight:\n <span class="currency">${numberToDollar(destination.estimatedFlightCostPerPerson)}</span> per person</p>
             </div>
             <button class="dest-book-btn" id="${destination.id}">Book Now</button>
         </section>`;
@@ -231,12 +231,12 @@ function prePopulateForm(event) {
 }
 
 function createFormDestCard(destination) {
-    formDestinationDisplay.innerHTML = '';
-    formDestinationDisplay.innerHTML = `
+    formDestinationCard.innerHTML = '';
+    formDestinationCard.innerHTML = `
     <h3>${destination.destination}</h3>
     <img class="form-dest-img" src="${destination.image}" alt="${destination.alt}">
-    <p>Lodging: ${numberToDollar(destination.estimatedLodgingCostPerDay)} per night </p>
-    <p>Flight: ${numberToDollar(destination.estimatedFlightCostPerPerson)} per person</p>
+    <p class="form-dest-text">Lodging: <span class="currency">${numberToDollar(destination.estimatedLodgingCostPerDay)}</span> per night </p>
+    <p class="form-dest-text">Flight: <span class="currency">${numberToDollar(destination.estimatedFlightCostPerPerson)}</span> per person</p>
     `;
 }
 
@@ -342,6 +342,6 @@ function validateTravelers() {;
     if (typeof travelerCount === 'number' && travelerCount <= 20 && travelerCount > 0) {
         return true;
     } else {
-        displayFormFeedback('invalidTravlers');
+        displayFormFeedback('invalidTravelers');
     }
 }
