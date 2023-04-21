@@ -179,10 +179,12 @@ function createDestinationCards(destinations) {
         destinationCardDisplay.innerHTML += `
         <section class="dest-card">
             <h3>${destinationLocation[0]}</h3>
-            <p>${destinationLocation[1]}</p>
+            <p class="country">${destinationLocation[1]}</p>
             <img class="destImg" src="${destination.image}" alt="${destination.alt}">
-            <p>Lodging: ${numberToDollar(destination.estimatedLodgingCostPerDay)} per night </p>
-            <p>Flight: ${numberToDollar(destination.estimatedFlightCostPerPerson)} per person</p>
+            <div class="dest-details">
+            <p class="dest-detail">Lodging:\n ${numberToDollar(destination.estimatedLodgingCostPerDay)}/night</p>
+            <p class="dest-detail">Flight:\n ${numberToDollar(destination.estimatedFlightCostPerPerson)}/person</p>
+            </div>
             <button class="dest-book-btn" id="${destination.id}">Book Now</button>
         </section>`;
     })
@@ -211,21 +213,21 @@ function cancelBookTripForm() {
 }
 
 function clearBookTripForm() {
-    formDate.value = ''
-    formDestination.value = ''
-    formDuration.value = ''
-    formTravelers.value = ''
-    formSubTotal.innerText = ''
+    formDate.value = '';
+    formDestination.value = '';
+    formDuration.value = '';
+    formTravelers.value = '';
+    formSubTotal.innerText = '';
 }
 
 function prePopulateForm(event) {
     const id = Number(event.target.id);
-    const chosenDestination = allDestinations.findById(id)
-    formDestinationId.value = id
-    formDestination.value = chosenDestination.destination
+    const chosenDestination = allDestinations.findById(id);
+    formDestinationId.value = id;
+    formDestination.value = chosenDestination.destination;
 
-    createFormDestCard(chosenDestination)
-    setFormMinDate()
+    createFormDestCard(chosenDestination);
+    setFormMinDate();
 }
 
 function createFormDestCard(destination) {
@@ -235,17 +237,17 @@ function createFormDestCard(destination) {
     <img class="form-dest-img" src="${destination.image}" alt="${destination.alt}">
     <p>Lodging: ${numberToDollar(destination.estimatedLodgingCostPerDay)} per night </p>
     <p>Flight: ${numberToDollar(destination.estimatedFlightCostPerPerson)} per person</p>
-    `
+    `;
 }
 
 function calculateSubtotal() {
-    const id = Number(formDestinationId.value)
-    const travelers = Number(formTravelers.value)
-    const duration = Number(formDuration.value)
-    const subTotal = allDestinations.calculateDestinationCost(id, travelers, duration)
+    const id = Number(formDestinationId.value);
+    const travelers = Number(formTravelers.value);
+    const duration = Number(formDuration.value);
+    const subTotal = allDestinations.calculateDestinationCost(id, travelers, duration);
 
     if (subTotal && travelers > 0 && duration > 0) {
-        formSubTotal.innerText = `${numberToDollar(subTotal)}`
+        formSubTotal.innerText = `${numberToDollar(subTotal)}`;
     }
 }
 
@@ -255,7 +257,7 @@ function setFormMinDate() {
     const userDate = new Date(today.getTime() - (timezoneOffset * 60 * 1000));
     const userDateString = userDate.toISOString().split('T')[0];
 
-    formDate.setAttribute('min', userDateString)
+    formDate.setAttribute('min', userDateString);
 }
 
 function submitTripForm() {
@@ -274,15 +276,15 @@ function submitTripForm() {
         post('trips', trip)
             .then((json)=> {
                 currentUserTrips.addNewTrip(trip)
-                displayFormFeedback('success')
-                populateHomePage()
+                displayFormFeedback('success');
+                populateHomePage();
                 clearBookTripForm();
             })
             .catch(err => {
                 if (err === 422) {
-                    displayFormFeedback('allFields')
+                    displayFormFeedback('allFields');
                 } else {
-                    displayFormFeedback('other')
+                    displayFormFeedback('other');
                 }
                 clearBookTripForm();
               });
@@ -290,56 +292,56 @@ function submitTripForm() {
 }
 
 function displayFormFeedback(type){
-    formFeedback.innerText = formFeedbackMessage[type]
+    formFeedback.innerText = formFeedbackMessage[type];
 }
 
 function validateDate() {
     const today = new Date();
-    today.setHours(0, 0, 0, 0)
+    today.setHours(0, 0, 0, 0);
     const recFormDate = formDate.value;
     const submittedDate = new Date(recFormDate + "T00:00:00Z");
     submittedDate.setMinutes(submittedDate.getMinutes() + submittedDate.getTimezoneOffset());
    
-    const maxDate = new Date(today)
+    const maxDate = new Date(today);
     maxDate.setFullYear(maxDate.getFullYear() + 1);
 
     if (submittedDate >= today && submittedDate <= maxDate) {
-        return true
+        return true;
     } else if(submittedDate < today){
-        displayFormFeedback('dateEarly')
+        displayFormFeedback('dateEarly');
     } else if (submittedDate > maxDate){
-        displayFormFeedback('dateLate')
+        displayFormFeedback('dateLate');
     } else {
-        displayFormFeedback('invalidDate')
+        displayFormFeedback('invalidDate');
     }
 }
 
 function validateDestination() {
     const destNames = allDestinations.allDestinations.map((destination) => {
-        return destination.destination
+        return destination.destination;
     })
 
     if (destNames.includes(formDestination.value)) {
-        return true
+        return true;
     } else {
-        displayFormFeedback('invalidDestination')
+        displayFormFeedback('invalidDestination');
     }
 }
 
 function validateDuration() {
-    const duration = Number(formDuration.value)
+    const duration = Number(formDuration.value);
     if (typeof duration === 'number' && duration <= 50 && duration > 0) {
-        return true
+        return true;
     } else {
-        displayFormFeedback('invalidDuration')
+        displayFormFeedback('invalidDuration');
     }
 }
 
-function validateTravelers() {
-    const travelerCount = Number(formTravelers.value)
+function validateTravelers() {;
+    const travelerCount = Number(formTravelers.value);
     if (typeof travelerCount === 'number' && travelerCount <= 20 && travelerCount > 0) {
-        return true
+        return true;
     } else {
-        displayFormFeedback('invalidTravlers')
+        displayFormFeedback('invalidTravlers');
     }
 }

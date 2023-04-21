@@ -12,11 +12,14 @@ body {
 }
 
 .past-head,
-h1 {
+h1,
+h2 {
   font-size: x-large;
   font-weight: 900;
   color: #2e2c5f;
 }
+
+
 
 .bottom-right {
   position: absolute;
@@ -107,11 +110,12 @@ th {
 
 td {
   text-align: center;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .rewards {
-  line-height: 5px;
+  margin:0px;
+  font-size: 14px;
 }
 
 .emphasize {
@@ -137,24 +141,73 @@ td {
  margin-bottom: 20px;
 }
 
-
 .plan-display {
   height: 100%;
 }
 
-.dest-card {
-  border: 1px purple solid;
-  width: 30%
+.destination-listings {
+  height: 100%;
+  width: 90%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.destination-listings {
-  border: red 1px solid;
-  height: 100%;
-  overflow: scroll;
+.dest-card {
+  border: 3px #07044E solid;
+  width: 45%;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+h3{
+  color: #9273DB;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  margin: 10px 0px 2px 0px;
+}
+
+.country{
+  margin: 0px 0px 5px 0px;
+  text-align: center;
+  color:#a7a7a7;
 }
 
 .destImg {
-  height: 150px;
+  width: 65%;
+  height: 50%;
+  align-self: center;
+}
+
+.dest-details{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dest-detail{
+  font-size: 12px;
+  font-weight: 600;
+  white-space: pre-line;
+}
+
+.dest-book-btn{
+  background-color: #9273DB;
+  color: #f0f0f0;
+  border: 0px;
+  height: 40px;
+}
+
+.dest-book-btn:hover{
+  background-color: #DB8592;
+  cursor: pointer;
 }
 
 .book-form {
