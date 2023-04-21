@@ -74,9 +74,6 @@ bookTripForm.addEventListener('submit', () => {
     submitTripForm()
 })
 
-
-
-
 function changePage(pageId) {
     pages.forEach((page) => {
         page.classList.add('hidden');
@@ -92,7 +89,7 @@ function populateUponLoad() {
 }
 
 function populateHomePage() {
-    userGreeting.innerText = `Welcome back, ${currentUser.travelerName}.`;
+    userGreeting.innerText = `Welcome back ${currentUser.findFirstName()}!`;
     createTripsTable(upComingTripTable, currentUserTrips.findByTense('upcoming'));
     updateAllTimeTripCost();
 }
@@ -119,10 +116,11 @@ function createTripsTable(table, tripList) {
          </tr>`;
 
     tripList.forEach(trip => {
+        let destination = allDestinations.findById(trip.destinationID)
         table.innerHTML += `
             <tr>
                  <td>${trip.status}</td>
-                 <td>${trip.destinationID}</td>
+                 <td>${destination.destination}</td>
                  <td>${trip.date}</td>
                  <td>${trip.duration}</td>
                 <td>${trip.travelers}</td>
