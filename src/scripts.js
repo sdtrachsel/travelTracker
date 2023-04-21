@@ -81,7 +81,7 @@ function changePage(pageId) {
         page.classList.add('hidden');
     })
 
-    if(pageId === 'planTripDisplay'){
+    if(pageId !== 'homeDisplay'){
         changeMainImage('smaller')
     }  else (
         changeMainImage('larger')
