@@ -11,6 +11,7 @@ body {
   font-family: 'Dosis', sans-serif;
 }
 
+.past-head,
 h1 {
   font-size: x-large;
   font-weight: 900;
@@ -125,6 +126,9 @@ td {
   margin: 30px;
 }
 
+.past-head{
+ margin-bottom: 20px;
+}
 .dest-card {
   border: 1px purple solid;
 }
