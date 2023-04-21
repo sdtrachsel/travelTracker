@@ -9,7 +9,8 @@ import formFeedbackMessage from './formFeedback';
 
 
 import './images/user-profile.png'
-
+import './images/traveler.png'
+import './images/traveler-trimmed.png'
 
 
 // Selectors
@@ -121,7 +122,7 @@ function createTripsTable(table, tripList) {
             <tr>
                  <td>${trip.status}</td>
                  <td>${destination.destination}</td>
-                 <td>${trip.date}</td>
+                 <td>${formatDateUser(trip.date)}</td>
                  <td>${trip.duration}</td>
                 <td>${trip.travelers}</td>
             </tr>`;
@@ -143,6 +144,15 @@ function numberToDollar(num) {
     const dollars = USDollar.format(num);
     return dollars
 }
+
+function formatDateUser(apiDate) {
+    const date = apiDate.split('/');
+    let day = date[1];
+    let month = date[2];
+    let year = date[0];
+
+    return (`${day}/${month}/${year}`);
+};
 
 function createDestinationCards(destinations) {
     destinationCardDisplay.innerHTML = '';

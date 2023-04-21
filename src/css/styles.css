@@ -1,28 +1,49 @@
+html {
+  height: 100%;
+}
+
 body {
-  border: green 2px solid;
   margin: 0px;
-  min-height: 100vh;
-  width: 100vw;
-  background: gray;
+  height: 100%;
+  background-color: white;
   display: flex;
   justify-content: center;
+  font-family: 'Dosis', sans-serif;
+}
+
+h1 {
+  font-size: x-large;
+  font-weight: 900;
+  color: #2e2c5f;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  margin-right: 15px;
+  height: 350px;
+}
+
+.font-family {
+  font-weight: 800;
 
 }
 
 .book-form,
 .wrapper {
-  border: blue 1px solid;
   align-self: center;
   height: 80vh;
   width: 80%;
   display: flex;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(36, 36, 36, 0.2), 0 6px 20px 0 rgba(36, 36, 36, 0.19);
 }
 
 nav {
-  border: purple solid 1px;
-  background-color: lightblue;
+  background-color: #e4be55;
   width: 20%;
 }
 
@@ -32,54 +53,101 @@ nav {
   align-items: center;
 }
 
-.profile-icon{
+.profile-icon {
   height: 25px;
   margin-right: 5px;
 }
+
 .nav-btns {
   display: flex;
   flex-direction: column;
+
 }
 
 .nav-btn {
   width: 50%;
   height: 75px;
   margin: 5px 0px 5px 0px;
+  color: #2e2c5f;
+  background-color: #C1DAE2;
+  border: 0px;
   align-self: flex-end;
   border-radius: 10px 0px 0px 10px;
 }
 
 main {
-  border: orange 1px solid;
-  background-color: lightcyan;
+  background-color: #C1DAE2;
   height: 100%;
   width: 80%;
-
 }
 
-.dest-card{
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-bottom: 50px;
+}
+
+th {
+  color: #f9f9f9;
+  background-color: #9273DB;
+  border-bottom: #DB8592 4px solid;
+
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+  font-size: 18px;
+}
+
+.rewards {
+  line-height: 5px;
+}
+
+.emphasize {
+  font-weight: 700;
+  color: #9273DB;
+}
+
+.total-spent{
+  color: #f9f9f9;
+  font-weight: 600;
+  padding: 5px;
+  width: 50%;
+  background-color:#9273DB;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.page {
+  margin: 30px;
+}
+
+.dest-card {
   border: 1px purple solid;
 }
 
-.plan-display{
+.plan-display {
   height: 100%;
 }
 
-.destination-listings{
+.destination-listings {
   border: red 1px solid;
   height: 100%;
- overflow: scroll;
+  overflow: scroll;
 }
 
-.destImg{
+.destImg {
   height: 150px;
 }
 
-.book-form{
+.book-form {
   background-color: aliceblue;
 }
 
-.form-dest-img{
+.form-dest-img {
   height: 125px;
 }
 
