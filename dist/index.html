@@ -18,16 +18,16 @@
     <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving"
       class="bottom-right larger" id="travelerImage">
     <nav>
-      <div class="profile">
+      <section class="profile">
         <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
         <p id="userName"></p>
-      </div>
+      </section>
     
-      <div class="nav-btns" role="tablist">
-        <button class="nav-btn" id="viewHomeBtn" role="tab" aria-selected="true" aria-controls="homeDisplay">Home</button>
+      <section class="nav-btns" role="tablist">
+        <button class="nav-btn" id="viewHomeBtn" role="tab" aria-selected="true" aria-controls="homeDisplay" disabled>Home</button>
         <button class="nav-btn" id="viewPastBtn" role="tab" aria-selected="false" aria-controls="pastDisplay">Past Trips</button>
         <button class="nav-btn" id="viewPlanTripBtn" role="tab" aria-selected="false" aria-controls="planTripDisplay">Plan Your Next Trip</button>
-      </div>
+      </section>
     </nav>
     <main>
       <section class="page" id="homeDisplay" role="tabpanel">
@@ -50,7 +50,7 @@
       </section>
       <section class="page plan-display" id="planTripDisplay" role="tabpanel" hidden>
         <h2>Choose Your Next Destination</h2>
-        <section class="destination-listings" id="destinationCards">
+        <section class="destination-listings scroll-lft-container" id="destinationCards">
           <!-- destination cards -->
         </section>
       </section>

@@ -11,13 +11,22 @@ body {
   font-family: 'Dosis', sans-serif;
 }
 
-.past-head,
-legend,
 h1,
-h2 {
+h2,
+legend,
+.past-head {
   font-size: x-large;
   font-weight: 900;
   color: #2e2c5f;
+}
+
+.scroll-lft-container{
+  direction: rtl;
+  overflow:auto;
+}
+
+.scroll-lft-item{
+  direction:ltr;
 }
 
 .bottom-right {
@@ -81,8 +90,10 @@ nav {
   width: 50%;
   height: 75px;
   margin: 5px 0px 5px 0px;
-  color: #f9f9f9;
-  background-color: #DB8592;
+  color: white;
+  background-color:#DB8592;
+  font-weight: bold;
+  font-size: .75rem;
   border: 0px;
   align-self: flex-end;
   border-radius: 10px 0px 0px 10px;

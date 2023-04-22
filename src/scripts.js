@@ -6,12 +6,9 @@ import Traveler from './Traveler'
 import Trip from './Trip'
 import Destination from './Destination';
 import formFeedbackMessage from './formFeedback';
-
-
 import './images/user-profile.png'
 import './images/traveler.png'
 import './images/traveler-trimmed.png'
-
 
 // Selectors
 const displayArea = document.getElementById('displayArea')
@@ -30,7 +27,7 @@ const tripAllTime = document.getElementById('totalSpent')
 const destinationCardDisplay = document.getElementById('destinationCards')
 const cancelTripBtn = document.getElementById('cancelTripBook')
 
-//form 
+// Form Selectors
 const bookTripForm = document.getElementById('bookTripForm')
 const formDestinationCard = document.getElementById('formDestCard')
 const formDestinationId = document.getElementById('formDestinationId')
@@ -67,20 +64,22 @@ viewHomeBtn.addEventListener('click', (event) => {
 })
 
 viewPastBtn.addEventListener('click', (event) => {
-    changePage(event, 'pastDisplay')
+    changePage(event, 'pastDisplay');
 })
 
 viewPlanTripBtn.addEventListener('click', (event) => {
-    changePage(event, 'planTripDisplay')
+    changePage(event, 'planTripDisplay');
 })
-cancelTripBtn.addEventListener('click', cancelBookTripForm)
-formDuration.addEventListener('input', calculateSubtotal)
-formTravelers.addEventListener('input', calculateSubtotal)
+
+cancelTripBtn.addEventListener('click', cancelBookTripForm);
+formDuration.addEventListener('input', calculateSubtotal);
+formTravelers.addEventListener('input', calculateSubtotal);
 bookTripForm.addEventListener('submit', () => {
     event.preventDefault();
-    submitTripForm()
+    submitTripForm();
 })
-formConfirmCloseBtn.addEventListener('click', confirmClose)
+
+formConfirmCloseBtn.addEventListener('click', confirmClose);
 
 function changePage(event, panelId) {
     updateTabs(event)
@@ -88,12 +87,15 @@ function changePage(event, panelId) {
 }
 
 function updateTabs(event) {
-    const selectedTab = document.getElementById(event.target.id)
-    console.log('selectedTab', selectedTab)
+    const selectedTab = document.getElementById(event.target.id);
+
     navBtns.forEach((btn) => {
-        btn.ariaSelected = 'false'
+        btn.ariaSelected = 'false';
+        btn.disabled = false;
     })
-    selectedTab.ariaSelected = 'true'
+
+    selectedTab.ariaSelected = 'true';
+    selectedTab.disabled = true;
 }
 
 function updateTabPanels(panelId) {
@@ -198,7 +200,7 @@ function createDestinationCards(destinations) {
         const destinationLocation = destination.destination.split(',')
 
         destinationCardDisplay.innerHTML += `
-        <section class="dest-card">
+        <section class="dest-card scroll-lft-item">
             <h3>${destinationLocation[0]}</h3>
             <p class="country">${destinationLocation[1]}</p>
             <img class="destImg" src="${destination.image}" alt="${destination.alt}">
