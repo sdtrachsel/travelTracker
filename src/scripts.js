@@ -98,7 +98,6 @@ function userLogin() {
 
                 populateUponLogin()
                 changePage('viewHomeBtn', 'homeDisplay')
-                changeMainImage('smaller')
                 loginDisplay.classList.add('hidden');
                 displayArea.classList.remove('hidden');
                 
