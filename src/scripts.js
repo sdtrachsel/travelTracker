@@ -1,4 +1,3 @@
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import { getTravelerData, post } from './apiCalls'
 import Traveler from './Traveler';
@@ -195,11 +194,7 @@ function populatePlanTripPage() {
 }
 
 function createTripsTable(table, tripList) {
-    if (table === 'upComingTripTable'){
-        
-    }
     table.innerHTML = '';
-
     table.innerHTML += `
         <tr>
             <th>Status</th>
