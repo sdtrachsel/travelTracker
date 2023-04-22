@@ -210,14 +210,16 @@ h3 {
   white-space: pre-line;
 }
 
-.dest-book-btn {
+.dest-book-btn,
+.confirm-close-btn {
   background-color: #9273DB;
   color: #f0f0f0;
   border: 0px;
   height: 40px;
 }
 
-.dest-book-btn:hover {
+.dest-book-btn:hover,
+.confirm-close-btn:hover {
   background-color: #DB8592;
   cursor: pointer;
 }
@@ -342,6 +344,14 @@ input[type=submit]:hover {
   background-color:#e4be55;
   color: #07044E;
 }
+
+.confirmation{
+  color: #07044E;
+  font-size: 1rem;
+}
+
+
+
 .hidden {
   display: none;
 }
