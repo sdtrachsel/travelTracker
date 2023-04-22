@@ -1,6 +1,6 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import { getLoadData, get, post, remove } from './apiCalls'
+import {getTravelerData, get, post, remove } from './apiCalls'
 import TravelerRepository from './TravelerRepository'
 import Traveler from './Traveler'
 import Trip from './Trip'
@@ -11,6 +11,13 @@ import './images/traveler.png'
 import './images/traveler-trimmed.png'
 
 // Selectors
+
+//login page
+const loginForm = document.getElementById('loginForm')
+const username = document.getElementById('username')
+const userPassword = document.getElementById('password')
+const loginFeedback = document.getElementById('loginFeedback')
+
 const displayArea = document.getElementById('displayArea')
 const bookTripFormDisplay = document.getElementById('bookTripFormDisplay')
 const pages = document.querySelectorAll('.page')
@@ -46,29 +53,33 @@ let allDestinations;
 let currentUser;
 let currentUserTrips;
 
-// Eventlisteners
-window.addEventListener('load', () => {
-    getLoadData()
-        .then(data => {
-            allTravelers = new TravelerRepository(data[0].travelers);
-            allDestinations = new Destination(data[1].destinations);
-            currentUser = new Traveler(allTravelers.findTravelerById(17));
-            currentUserTrips = new Trip(allTravelers.findTravelerById(17), data[2].trips)
-            populateUponLoad()
-        })
-        .catch(err => console.log(err))
-});
+
+loginForm.addEventListener('submit', () => {
+    event.preventDefault()
+    userLogin()
+})
+// window.addEventListener('load', () => {
+//     getLoadData()
+//         .then(data => {
+//             allTravelers = new TravelerRepository(data[0].travelers);
+//             allDestinations = new Destination(data[1].destinations);
+//             currentUser = new Traveler(allTravelers.findTravelerById(17));
+//             currentUserTrips = new Trip(allTravelers.findTravelerById(17), data[2].trips)
+//             populateUponLoad()
+//         })
+//         .catch(err => console.log(err))
+// });
 
 viewHomeBtn.addEventListener('click', (event) => {
-    changePage(event, 'homeDisplay')
+    changePage(event.target.id, 'homeDisplay')
 })
 
 viewPastBtn.addEventListener('click', (event) => {
-    changePage(event, 'pastDisplay');
+    changePage(event.target.id, 'pastDisplay');
 })
 
 viewPlanTripBtn.addEventListener('click', (event) => {
-    changePage(event, 'planTripDisplay');
+    changePage(event.target.id, 'planTripDisplay');
 })
 
 cancelTripBtn.addEventListener('click', cancelBookTripForm);
@@ -81,13 +92,68 @@ bookTripForm.addEventListener('submit', () => {
 
 formConfirmCloseBtn.addEventListener('click', confirmClose);
 
-function changePage(event, panelId) {
-    updateTabs(event)
+
+
+function userLogin() {
+    const travelerId = getTravelerId(username.value);
+    const travelerPw = password.value 
+   
+    if (validateUserName(travelerId) && validatePassword(travelerPw)) {
+        // get api information
+        getTravelerData(travelerId)
+            .then(data => {
+                currentUser = new Traveler(data[0])
+                currentUserTrips = new Trip (data[0], data[2].trips)
+                allDestinations = new Destination(data[1].destinations)
+
+                populateUponLogin()
+                
+                changePage(viewHomeBtn, 'homeDisplay')
+              })
+        .catch(err => console.log(err))
+
+
+    } else {
+        clearLoginFields()
+    }
+}
+
+function getTravelerId(username) {
+    const travelerId = Number(username.slice(8))
+
+    return travelerId
+}
+
+function validateUserName(id) {
+    if (id) {
+        return true
+    } else {
+        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
+    }
+}
+
+function validatePassword(password) {
+    if (password !== 'travel') {
+        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
+    } else {
+        return true;
+    }
+
+}
+
+function clearLoginFields() {
+    userPassword.value = '';
+    username.value = '';
+}
+
+
+function changePage(targetId, panelId) {
+    updateTabs(targetId)
     updateTabPanels(panelId)
 }
 
-function updateTabs(event) {
-    const selectedTab = document.getElementById(event.target.id);
+function updateTabs(targetId) {
+    const selectedTab = document.getElementById(targetId);
 
     navBtns.forEach((btn) => {
         btn.ariaSelected = 'false';
@@ -122,7 +188,7 @@ function changeMainImage(size) {
     mainImage.classList.add(size)
 }
 
-function populateUponLoad() {
+function populateUponLogin() {
     loginName.innerText = `${currentUser.travelerName}`;
     populateHomePage()
     populatePastPage()

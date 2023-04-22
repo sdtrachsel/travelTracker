@@ -1,4 +1,5 @@
 const formFeedbackMessage    = {
+    invalidLogin: 'No user found. Please verify username and password.',
     success: 'Your trip has been booked! Please watch for an email from your travel agent.',
     invalidDate: 'Please enter date as MM/DD/YYY',
     dateEarly:'Sorry we can\'t book before today',
