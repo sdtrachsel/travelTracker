@@ -75,23 +75,27 @@ nav {
 .nav-btns {
   display: flex;
   flex-direction: column;
-
 }
 
 .nav-btn {
   width: 50%;
   height: 75px;
   margin: 5px 0px 5px 0px;
-  color: #2e2c5f;
-  background-color: #C1DAE2;
+  color: #f9f9f9;
+  background-color: #DB8592;
   border: 0px;
   align-self: flex-end;
   border-radius: 10px 0px 0px 10px;
 }
 
-.nav-btn:hover {
+.nav-btn:disabled{
+  background-color: #C1DAE2;
+  color: #2e2c5f;
+}
+
+.nav-btn:hover,
+.nav-btn:focus {
   background-color: #9273DB;
-  color: #f9f9f9;
   cursor: pointer;
 }
 
@@ -105,16 +109,14 @@ table {
   width: 80%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  max-height: 150px;
 }
 
 th {
   color: #f9f9f9;
   background-color: #9273DB;
   border-bottom: #DB8592 4px solid;
-
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 

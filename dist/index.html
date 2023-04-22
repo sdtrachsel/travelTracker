@@ -23,7 +23,7 @@
         <p id="userName"></p>
       </div>
       <div class="nav-btns">
-        <button class="nav-btn" id="viewHomeBtn">Home</button>
+        <button class="nav-btn" id="viewHomeBtn" disabled>Home</button>
         <button class="nav-btn" id="viewPastBtn">Past Trips</button>
         <button class="nav-btn" id="viewPlanTripBtn">Plan Your Next Trip</button>
       </div>
@@ -32,11 +32,12 @@
       <section class="page" id="homeDisplay">
         <h1 id="greeting" class=""> Welcome </h1>
         <p>Check out your upcoming trips:</p>
-        <table id="upcomingTrps">
-          <!-- upcoming trips here -->
-        </table>
-        <p class="rewards">Our rewards program gives you more of what you love, <span
-            class="emphasize">ADVENTURE!</span></p>
+        <div>
+          <table id="upcomingTrps">
+            <!-- upcoming trips here -->
+          </table>
+        </div>
+        <p class="rewards">Our rewards program gives you more of what you love, <span class="emphasize">ADVENTURE!</span></p>
         <p class="rewards">Speak with your travel agent about joining the Adventure Club.</p>
         <p class="total-spent">You have spent <span id="totalSpent" class="currency"></span> on all your trips.</p>
         <p class="rewards">That's a whole lot of new adventures.</p>
@@ -79,6 +80,13 @@
           <p class="form-feedback" id="formFeedback"></p>
         </fieldset>
       </form>
+      <section class="confirmation-display hidden" id="confirmationDisplay">
+        <h2>Congratuations!</h2>
+        <h3>Your trip to <span id="confirmDest"></span> has been booked</h3>
+        <p>Please watch for an email from your travel agent.</p>
+       
+        <button id="confirmationCloseBtn">Close</button>
+      </section>
     </div>
     <button class="cancel" id="cancelTripBook" type="button">CANCEL</button>
   </section>

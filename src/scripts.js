@@ -17,6 +17,7 @@ import './images/traveler-trimmed.png'
 const displayArea = document.getElementById('displayArea')
 const bookTripFormDisplay = document.getElementById('bookTripFormDisplay')
 const pages = document.querySelectorAll('.page')
+const navBtns = document.querySelectorAll('.nav-btn')
 const mainImage =document.getElementById('travelerImage')
 const viewHomeBtn = document.getElementById('viewHomeBtn');
 const viewPastBtn = document.getElementById('viewPastBtn');
@@ -39,6 +40,9 @@ const formDuration = document.getElementById('formDuration')
 const formTravelers = document.getElementById('formTravelers')
 const formSubTotal = document.getElementById('tripSubTotal')
 const formFeedback = document.getElementById('formFeedback')
+const formConfirmDisplay = document.getElementById('confirmationDisplay')
+const formConfirmDest = document.getElementById('confirmDest')
+const formConfirmCloseBtn =document.getElementById('confirmationCloseBtn')
 
 let allTravelers;
 let allDestinations;
@@ -58,23 +62,26 @@ window.addEventListener('load', () => {
         .catch(err => console.log(err))
 });
 
-viewHomeBtn.addEventListener('click', () => {
+viewHomeBtn.addEventListener('click', (event) => {
     changePage('homeDisplay')
+    changeNavBtnState(event)
 })
-viewPastBtn.addEventListener('click', () => {
+viewPastBtn.addEventListener('click', (event) => {
     changePage('pastDisplay')
+    changeNavBtnState(event)
 })
-viewPlanTripBtn.addEventListener('click', () => {
+viewPlanTripBtn.addEventListener('click', (event) => {
     changePage('planTripDisplay')
+    changeNavBtnState(event)
 })
 cancelTripBtn.addEventListener('click', cancelBookTripForm)
-
 formDuration.addEventListener('input', calculateSubtotal)
 formTravelers.addEventListener('input', calculateSubtotal)
 bookTripForm.addEventListener('submit', () => {
     event.preventDefault();
     submitTripForm()
 })
+formConfirmCloseBtn.addEventListener('click', confirmClose)
 
 function changePage(pageId) {
     pages.forEach((page) => {
@@ -87,6 +94,15 @@ function changePage(pageId) {
         changeMainImage('larger')
     )
     document.getElementById(pageId).classList.remove('hidden')
+}
+
+function changeNavBtnState(event){
+    navBtns.forEach((btn) => {
+        btn.disabled = false;
+    })
+
+    document.getElementById(event.target.id).disabled = true;
+
 }
 
 function changeMainImage(size){
@@ -146,9 +162,8 @@ function createTripsTable(table, tripList) {
 }
 
 function updateAllTimeTripCost() {
-    const total = currentUserTrips.calulateAllTimeCost(allDestinations)
-
-    tripAllTime.innerText = `${numberToDollar(total)}`
+    const total = currentUserTrips.calulateAllTimeCost(allDestinations);
+    tripAllTime.innerText = `${numberToDollar(total)}`;
 }
 
 function numberToDollar(num) {
@@ -231,7 +246,6 @@ function prePopulateForm(event) {
 }
 
 function createFormDestCard(destination) {
-    formDestinationCard.innerHTML = '';
     formDestinationCard.innerHTML = `
     <h3>${destination.destination}</h3>
     <img class="form-dest-img" src="${destination.image}" alt="${destination.alt}">
@@ -276,9 +290,9 @@ function submitTripForm() {
         post('trips', trip)
             .then((json)=> {
                 currentUserTrips.addNewTrip(trip)
-                displayFormFeedback('success');
+                declareTripBooked(trip);
                 populateHomePage();
-                clearBookTripForm();
+                
             })
             .catch(err => {
                 if (err === 422) {
@@ -290,6 +304,41 @@ function submitTripForm() {
               });
     }
 }
+
+// const formConfirmDisplay = document.getElementById('confirmationDisplay')
+// const formConfirmDest = document.getElementById('confirmDest')
+
+function declareTripBooked(trip){
+        //populate confirmation page
+        formConfirmDest.innerText =`${allDestinations.findById(trip.destinationID).destination}`
+        //show confirmaitonpage
+            formConfirmDisplay.classList.remove('hidden')
+
+        // hide form
+        bookTripForm.classList.add('hidden')
+
+        //clear form
+        clearBookTripForm();
+
+        //hide cancel button
+        cancelTripBtn.classList.add('hidden')
+
+        
+}
+
+function confirmClose(){
+    formConfirmDest.innerText =''
+    formConfirmDisplay.classList.add('hidden')
+    bookTripForm.classList.remove('hidden')
+    cancelTripBtn.classList.remove('hidden')
+    bookTripFormDisplay.classList.add('hidden')
+    displayArea.classList.remove('hidden')
+}
+///// after backHome clicked
+// change to home page
+// hide confirmaiton page
+// show form
+// show cancel button
 
 function displayFormFeedback(type){
     formFeedback.innerText = formFeedbackMessage[type];
