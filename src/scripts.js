@@ -1,6 +1,6 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import {getTravelerData, get, post, remove } from './apiCalls'
+import { getTravelerData, get, post, remove } from './apiCalls'
 import TravelerRepository from './TravelerRepository'
 import Traveler from './Traveler'
 import Trip from './Trip'
@@ -82,31 +82,35 @@ bookTripForm.addEventListener('submit', () => {
 
 formConfirmCloseBtn.addEventListener('click', confirmClose);
 
-
-
 function userLogin() {
     const travelerId = getTravelerId(username.value);
-    const travelerPw = password.value 
-   
+    const travelerPw = password.value
+    console.log('usName', validateUserName(travelerId))
+    console.log('uPass', validatePassword(travelerPw))
     if (validateUserName(travelerId) && validatePassword(travelerPw)) {
         // get api information
         getTravelerData(travelerId)
             .then(data => {
+                console.log(data)
                 currentUser = new Traveler(data[0])
-                currentUserTrips = new Trip (data[0], data[2].trips)
+                currentUserTrips = new Trip(data[0], data[2].trips)
                 allDestinations = new Destination(data[1].destinations)
 
                 populateUponLogin()
                 changePage('viewHomeBtn', 'homeDisplay')
                 loginDisplay.classList.add('hidden');
                 displayArea.classList.remove('hidden');
-                
-              })
-        .catch(err => console.log(err))
 
-
-    } else {
-        clearLoginFields()
+            })
+            .catch(err => {
+                console.log(err)
+                if (err === 422) {
+                    loginFeedback.innerText = `incatch ${formFeedbackMessage['invalidLogin']}`;;
+                } else {
+                    loginFeedback.innerText = `in catch${formFeedbackMessage['other']}`;;
+                }
+                clearLoginFields()
+            });
     }
 }
 
@@ -117,20 +121,21 @@ function getTravelerId(username) {
 }
 
 function validateUserName(id) {
-    if (id) {
-        return true
-    } else {
+    if (!id) {
         loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
+        clearLoginFields();
+    } else {
+        return true;
     }
 }
 
 function validatePassword(password) {
     if (password !== 'travel') {
         loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
+        clearLoginFields();
     } else {
         return true;
     }
-
 }
 
 function clearLoginFields() {
