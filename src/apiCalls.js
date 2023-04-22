@@ -4,9 +4,9 @@ const get = (url) => {
     return fetch(baseUrl + url).then((response) => response.json());
 }
 
-const getLoadData = () => {
+const getTravelerData = (travlerId) => {
     return Promise.all([
-        get('travelers'),
+        get('travelers/'+travlerId),
         get('destinations'),
         get('trips')
     ])
@@ -34,4 +34,4 @@ const remove = (url) => {
     }).then((response) => response.json());
 }
 
-export { getLoadData, get, post, remove };
+export { getTravelerData, get, post, remove };

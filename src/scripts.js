@@ -1,19 +1,24 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import { getLoadData, get, post, remove } from './apiCalls'
+import {getTravelerData, get, post, remove } from './apiCalls'
 import TravelerRepository from './TravelerRepository'
 import Traveler from './Traveler'
 import Trip from './Trip'
 import Destination from './Destination';
 import formFeedbackMessage from './formFeedback';
-
-
 import './images/user-profile.png'
 import './images/traveler.png'
 import './images/traveler-trimmed.png'
 
-
 // Selectors
+
+//login page
+const loginDisplay = document.getElementById('travelerLoginDisplay')
+const loginForm = document.getElementById('loginForm')
+const username = document.getElementById('username')
+const userPassword = document.getElementById('password')
+const loginFeedback = document.getElementById('loginFeedback')
+
 const displayArea = document.getElementById('displayArea')
 const bookTripFormDisplay = document.getElementById('bookTripFormDisplay')
 const pages = document.querySelectorAll('.page')
@@ -30,7 +35,7 @@ const tripAllTime = document.getElementById('totalSpent')
 const destinationCardDisplay = document.getElementById('destinationCards')
 const cancelTripBtn = document.getElementById('cancelTripBook')
 
-//form 
+// Form Selectors
 const bookTripForm = document.getElementById('bookTripForm')
 const formDestinationCard = document.getElementById('formDestCard')
 const formDestinationId = document.getElementById('formDestinationId')
@@ -49,51 +54,106 @@ let allDestinations;
 let currentUser;
 let currentUserTrips;
 
-// Eventlisteners
-window.addEventListener('load', () => {
-    getLoadData()
-        .then(data => {
-            allTravelers = new TravelerRepository(data[0].travelers);
-            allDestinations = new Destination(data[1].destinations);
-            currentUser = new Traveler(allTravelers.findTravelerById(17));
-            currentUserTrips = new Trip(allTravelers.findTravelerById(17), data[2].trips)
-            populateUponLoad()
-        })
-        .catch(err => console.log(err))
-});
+
+loginForm.addEventListener('submit', () => {
+    event.preventDefault()
+    userLogin()
+})
 
 viewHomeBtn.addEventListener('click', (event) => {
-    changePage(event, 'homeDisplay')
+    changePage(event.target.id, 'homeDisplay')
 })
 
 viewPastBtn.addEventListener('click', (event) => {
-    changePage(event, 'pastDisplay')
+    changePage(event.target.id, 'pastDisplay');
 })
 
 viewPlanTripBtn.addEventListener('click', (event) => {
-    changePage(event, 'planTripDisplay')
+    changePage(event.target.id, 'planTripDisplay');
 })
-cancelTripBtn.addEventListener('click', cancelBookTripForm)
-formDuration.addEventListener('input', calculateSubtotal)
-formTravelers.addEventListener('input', calculateSubtotal)
+
+cancelTripBtn.addEventListener('click', cancelBookTripForm);
+formDuration.addEventListener('input', calculateSubtotal);
+formTravelers.addEventListener('input', calculateSubtotal);
 bookTripForm.addEventListener('submit', () => {
     event.preventDefault();
-    submitTripForm()
+    submitTripForm();
 })
-formConfirmCloseBtn.addEventListener('click', confirmClose)
 
-function changePage(event, panelId) {
-    updateTabs(event)
+formConfirmCloseBtn.addEventListener('click', confirmClose);
+
+
+
+function userLogin() {
+    const travelerId = getTravelerId(username.value);
+    const travelerPw = password.value 
+   
+    if (validateUserName(travelerId) && validatePassword(travelerPw)) {
+        // get api information
+        getTravelerData(travelerId)
+            .then(data => {
+                currentUser = new Traveler(data[0])
+                currentUserTrips = new Trip (data[0], data[2].trips)
+                allDestinations = new Destination(data[1].destinations)
+
+                populateUponLogin()
+                changePage('viewHomeBtn', 'homeDisplay')
+                loginDisplay.classList.add('hidden');
+                displayArea.classList.remove('hidden');
+                
+              })
+        .catch(err => console.log(err))
+
+
+    } else {
+        clearLoginFields()
+    }
+}
+
+function getTravelerId(username) {
+    const travelerId = Number(username.slice(8))
+
+    return travelerId
+}
+
+function validateUserName(id) {
+    if (id) {
+        return true
+    } else {
+        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
+    }
+}
+
+function validatePassword(password) {
+    if (password !== 'travel') {
+        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
+    } else {
+        return true;
+    }
+
+}
+
+function clearLoginFields() {
+    userPassword.value = '';
+    username.value = '';
+}
+
+
+function changePage(targetId, panelId) {
+    updateTabs(targetId)
     updateTabPanels(panelId)
 }
 
-function updateTabs(event) {
-    const selectedTab = document.getElementById(event.target.id)
-    console.log('selectedTab', selectedTab)
+function updateTabs(targetId) {
+    const selectedTab = document.getElementById(targetId);
+
     navBtns.forEach((btn) => {
-        btn.ariaSelected = 'false'
+        btn.ariaSelected = 'false';
+        btn.disabled = false;
     })
-    selectedTab.ariaSelected = 'true'
+
+    selectedTab.ariaSelected = 'true';
+    selectedTab.disabled = true;
 }
 
 function updateTabPanels(panelId) {
@@ -120,7 +180,7 @@ function changeMainImage(size) {
     mainImage.classList.add(size)
 }
 
-function populateUponLoad() {
+function populateUponLogin() {
     loginName.innerText = `${currentUser.travelerName}`;
     populateHomePage()
     populatePastPage()
@@ -198,7 +258,7 @@ function createDestinationCards(destinations) {
         const destinationLocation = destination.destination.split(',')
 
         destinationCardDisplay.innerHTML += `
-        <section class="dest-card">
+        <section class="dest-card scroll-lft-item">
             <h3>${destinationLocation[0]}</h3>
             <p class="country">${destinationLocation[1]}</p>
             <img class="destImg" src="${destination.image}" alt="${destination.alt}">

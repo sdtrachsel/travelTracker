@@ -11,13 +11,28 @@ body {
   font-family: 'Dosis', sans-serif;
 }
 
-.past-head,
-legend,
+.login-form{
+  /* border: red 1px solid; */
+  width: 40%;
+  height: 55%;
+}
+
 h1,
-h2 {
+h2,
+legend,
+.past-head {
   font-size: x-large;
   font-weight: 900;
   color: #2e2c5f;
+}
+
+.scroll-lft-container{
+  direction: rtl;
+  overflow:auto;
+}
+
+.scroll-lft-item{
+  direction:ltr;
 }
 
 .bottom-right {
@@ -46,6 +61,7 @@ h2 {
 }
 
 .book-form,
+.traveler-login,
 .wrapper {
   align-self: center;
   height: 80vh;
@@ -55,6 +71,8 @@ h2 {
   overflow: hidden;
   box-shadow: 0 4px 8px 0 rgba(36, 36, 36, 0.2), 0 6px 20px 0 rgba(36, 36, 36, 0.19);
 }
+
+
 
 nav {
   background-color: #e4be55;
@@ -81,8 +99,10 @@ nav {
   width: 50%;
   height: 75px;
   margin: 5px 0px 5px 0px;
-  color: #f9f9f9;
-  background-color: #DB8592;
+  color: white;
+  background-color:#DB8592;
+  font-weight: bold;
+  font-size: .75rem;
   border: 0px;
   align-self: flex-end;
   border-radius: 10px 0px 0px 10px;
@@ -224,7 +244,8 @@ h3 {
   cursor: pointer;
 }
 
-.book-form {
+.book-form, 
+.traveler-login{
   background-color: #C1DAE2;
   display: flex;
   flex-direction: column;
@@ -234,6 +255,15 @@ h3 {
   height: 100%;
   width: 100%;
   display: flex;
+}
+
+.login-form {
+  align-self: center;
+  margin-left: 10rem;
+}
+
+input[type=password]{
+  margin-bottom: 10px;
 }
 
 form {
@@ -267,10 +297,12 @@ label {
 
 input[type=text],
 input[type=date],
-input[type=number] {
+input[type=number],
+input[type=password] {
   width: 50%;
   height: 18px;
 }
+
 .subtotal{
   margin: 10px 0px;
 }
@@ -349,7 +381,6 @@ input[type=submit]:hover {
   color: #07044E;
   font-size: 1rem;
 }
-
 
 
 .hidden {
