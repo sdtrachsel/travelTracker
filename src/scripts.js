@@ -195,6 +195,9 @@ function populatePlanTripPage() {
 }
 
 function createTripsTable(table, tripList) {
+    if (table === 'upComingTripTable'){
+        
+    }
     table.innerHTML = '';
 
     table.innerHTML += `

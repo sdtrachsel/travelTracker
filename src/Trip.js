@@ -20,7 +20,9 @@ class Trip {
         if(tense === 'past'){
             trips = this.allTrips.filter(trip => new Date(trip.date) < now)
         } else if(tense === 'upcoming'){
-            trips = this.allTrips.filter(trip => new Date(trip.date) >= now)
+            const upTrips = this.allTrips.filter(trip => new Date(trip.date) >= now)
+            trips = [... upTrips];
+            trips.sort((a, b) => new Date(a.date) - new Date(b.date))
         }
         
         if(trips){
