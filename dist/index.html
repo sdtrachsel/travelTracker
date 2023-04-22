@@ -22,14 +22,15 @@
         <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
         <p id="userName"></p>
       </div>
-      <div class="nav-btns">
-        <button class="nav-btn" id="viewHomeBtn" disabled>Home</button>
-        <button class="nav-btn" id="viewPastBtn">Past Trips</button>
-        <button class="nav-btn" id="viewPlanTripBtn">Plan Your Next Trip</button>
+    
+      <div class="nav-btns" role="tablist">
+        <button class="nav-btn" id="viewHomeBtn" role="tab" aria-selected="true" aria-controls="homeDisplay">Home</button>
+        <button class="nav-btn" id="viewPastBtn" role="tab" aria-selected="false" aria-controls="pastDisplay">Past Trips</button>
+        <button class="nav-btn" id="viewPlanTripBtn" role="tab" aria-selected="false" aria-controls="planTripDisplay">Plan Your Next Trip</button>
       </div>
     </nav>
     <main>
-      <section class="page" id="homeDisplay">
+      <section class="page" id="homeDisplay" role="tabpanel">
         <h1 id="greeting" class=""> Welcome </h1>
         <p>Check out your upcoming trips:</p>
         <div>
@@ -42,12 +43,12 @@
         <p class="total-spent">You have spent <span id="totalSpent" class="currency"></span> on all your trips.</p>
         <p class="rewards">That's a whole lot of new adventures.</p>
       </section>
-      <section class="page hidden" id="pastDisplay">
+      <section class="page" id="pastDisplay" role="tabpanel" hidden>
         <h2 class="past-head">Your Past Trips</h2>
         <table id="pastTrps">
         </table>
       </section>
-      <section class="page plan-display hidden" id="planTripDisplay">
+      <section class="page plan-display" id="planTripDisplay" role="tabpanel" hidden>
         <h2>Choose Your Next Destination</h2>
         <section class="destination-listings" id="destinationCards">
           <!-- destination cards -->

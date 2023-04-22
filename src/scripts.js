@@ -18,7 +18,7 @@ const displayArea = document.getElementById('displayArea')
 const bookTripFormDisplay = document.getElementById('bookTripFormDisplay')
 const pages = document.querySelectorAll('.page')
 const navBtns = document.querySelectorAll('.nav-btn')
-const mainImage =document.getElementById('travelerImage')
+const mainImage = document.getElementById('travelerImage')
 const viewHomeBtn = document.getElementById('viewHomeBtn');
 const viewPastBtn = document.getElementById('viewPastBtn');
 const viewPlanTripBtn = document.getElementById('viewPlanTripBtn');
@@ -42,7 +42,7 @@ const formSubTotal = document.getElementById('tripSubTotal')
 const formFeedback = document.getElementById('formFeedback')
 const formConfirmDisplay = document.getElementById('confirmationDisplay')
 const formConfirmDest = document.getElementById('confirmDest')
-const formConfirmCloseBtn =document.getElementById('confirmationCloseBtn')
+const formConfirmCloseBtn = document.getElementById('confirmationCloseBtn')
 
 let allTravelers;
 let allDestinations;
@@ -55,24 +55,23 @@ window.addEventListener('load', () => {
         .then(data => {
             allTravelers = new TravelerRepository(data[0].travelers);
             allDestinations = new Destination(data[1].destinations);
-            currentUser = new Traveler(allTravelers.findTravelerById(14));
-            currentUserTrips = new Trip(allTravelers.findTravelerById(14), data[2].trips)
+            currentUser = new Traveler(allTravelers.findTravelerById(17));
+            currentUserTrips = new Trip(allTravelers.findTravelerById(17), data[2].trips)
             populateUponLoad()
         })
         .catch(err => console.log(err))
 });
 
 viewHomeBtn.addEventListener('click', (event) => {
-    changePage('homeDisplay')
-    changeNavBtnState(event)
+    changePage(event, 'homeDisplay')
 })
+
 viewPastBtn.addEventListener('click', (event) => {
-    changePage('pastDisplay')
-    changeNavBtnState(event)
+    changePage(event, 'pastDisplay')
 })
+
 viewPlanTripBtn.addEventListener('click', (event) => {
-    changePage('planTripDisplay')
-    changeNavBtnState(event)
+    changePage(event, 'planTripDisplay')
 })
 cancelTripBtn.addEventListener('click', cancelBookTripForm)
 formDuration.addEventListener('input', calculateSubtotal)
@@ -83,31 +82,38 @@ bookTripForm.addEventListener('submit', () => {
 })
 formConfirmCloseBtn.addEventListener('click', confirmClose)
 
-function changePage(pageId) {
+function changePage(event, panelId) {
+    updateTabs(event)
+    updateTabPanels(panelId)
+}
+
+function updateTabs(event) {
+    const selectedTab = document.getElementById(event.target.id)
+    console.log('selectedTab', selectedTab)
+    navBtns.forEach((btn) => {
+        btn.ariaSelected = 'false'
+    })
+    selectedTab.ariaSelected = 'true'
+}
+
+function updateTabPanels(panelId) {
+    const selectedPanel = document.getElementById(panelId)
     pages.forEach((page) => {
-        page.classList.add('hidden');
+        page.hidden = true;
     })
 
-    if(pageId !== 'homeDisplay'){
+    if (panelId !== 'homeDisplay') {
         changeMainImage('smaller')
-    }  else (
+    } else (
         changeMainImage('larger')
     )
-    document.getElementById(pageId).classList.remove('hidden')
+
+    selectedPanel.hidden = false;
 }
 
-function changeNavBtnState(event){
-    navBtns.forEach((btn) => {
-        btn.disabled = false;
-    })
-
-    document.getElementById(event.target.id).disabled = true;
-
-}
-
-function changeMainImage(size){
-    if(size === 'larger'){
-       mainImage.classList.remove('smaller')
+function changeMainImage(size) {
+    if (size === 'larger') {
+        mainImage.classList.remove('smaller')
     } else {
         mainImage.classList.remove('larger')
     }
@@ -288,11 +294,11 @@ function submitTripForm() {
         }
 
         post('trips', trip)
-            .then((json)=> {
+            .then((json) => {
                 currentUserTrips.addNewTrip(trip)
                 declareTripBooked(trip);
                 populateHomePage();
-                
+
             })
             .catch(err => {
                 if (err === 422) {
@@ -301,46 +307,28 @@ function submitTripForm() {
                     displayFormFeedback('other');
                 }
                 clearBookTripForm();
-              });
+            });
     }
 }
 
-// const formConfirmDisplay = document.getElementById('confirmationDisplay')
-// const formConfirmDest = document.getElementById('confirmDest')
-
-function declareTripBooked(trip){
-        //populate confirmation page
-        formConfirmDest.innerText =`${allDestinations.findById(trip.destinationID).destination}`
-        //show confirmaitonpage
-            formConfirmDisplay.classList.remove('hidden')
-
-        // hide form
-        bookTripForm.classList.add('hidden')
-
-        //clear form
-        clearBookTripForm();
-
-        //hide cancel button
-        cancelTripBtn.classList.add('hidden')
-
-        
+function declareTripBooked(trip) {
+    formConfirmDest.innerText = `${allDestinations.findById(trip.destinationID).destination}`
+    formConfirmDisplay.classList.remove('hidden')
+    bookTripForm.classList.add('hidden')
+    clearBookTripForm();
+    cancelTripBtn.classList.add('hidden')
 }
 
-function confirmClose(){
-    formConfirmDest.innerText =''
+function confirmClose() {
+    formConfirmDest.innerText = ''
     formConfirmDisplay.classList.add('hidden')
     bookTripForm.classList.remove('hidden')
     cancelTripBtn.classList.remove('hidden')
     bookTripFormDisplay.classList.add('hidden')
     displayArea.classList.remove('hidden')
 }
-///// after backHome clicked
-// change to home page
-// hide confirmaiton page
-// show form
-// show cancel button
 
-function displayFormFeedback(type){
+function displayFormFeedback(type) {
     formFeedback.innerText = formFeedbackMessage[type];
 }
 
@@ -350,15 +338,15 @@ function validateDate() {
     const recFormDate = formDate.value;
     const submittedDate = new Date(recFormDate + "T00:00:00Z");
     submittedDate.setMinutes(submittedDate.getMinutes() + submittedDate.getTimezoneOffset());
-   
+
     const maxDate = new Date(today);
     maxDate.setFullYear(maxDate.getFullYear() + 1);
 
     if (submittedDate >= today && submittedDate <= maxDate) {
         return true;
-    } else if(submittedDate < today){
+    } else if (submittedDate < today) {
         displayFormFeedback('dateEarly');
-    } else if (submittedDate > maxDate){
+    } else if (submittedDate > maxDate) {
         displayFormFeedback('dateLate');
     } else {
         displayFormFeedback('invalidDate');
@@ -386,7 +374,8 @@ function validateDuration() {
     }
 }
 
-function validateTravelers() {;
+function validateTravelers() {
+    ;
     const travelerCount = Number(formTravelers.value);
     if (typeof travelerCount === 'number' && travelerCount <= 20 && travelerCount > 0) {
         return true;
