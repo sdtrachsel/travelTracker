@@ -13,6 +13,7 @@ import './images/traveler-trimmed.png'
 // Selectors
 
 //login page
+const loginDisplay = document.getElementById('travelerLoginDisplay')
 const loginForm = document.getElementById('loginForm')
 const username = document.getElementById('username')
 const userPassword = document.getElementById('password')
@@ -58,17 +59,6 @@ loginForm.addEventListener('submit', () => {
     event.preventDefault()
     userLogin()
 })
-// window.addEventListener('load', () => {
-//     getLoadData()
-//         .then(data => {
-//             allTravelers = new TravelerRepository(data[0].travelers);
-//             allDestinations = new Destination(data[1].destinations);
-//             currentUser = new Traveler(allTravelers.findTravelerById(17));
-//             currentUserTrips = new Trip(allTravelers.findTravelerById(17), data[2].trips)
-//             populateUponLoad()
-//         })
-//         .catch(err => console.log(err))
-// });
 
 viewHomeBtn.addEventListener('click', (event) => {
     changePage(event.target.id, 'homeDisplay')
@@ -107,8 +97,11 @@ function userLogin() {
                 allDestinations = new Destination(data[1].destinations)
 
                 populateUponLogin()
+                changePage('viewHomeBtn', 'homeDisplay')
+                changeMainImage('smaller')
+                loginDisplay.classList.add('hidden');
+                displayArea.classList.remove('hidden');
                 
-                changePage(viewHomeBtn, 'homeDisplay')
               })
         .catch(err => console.log(err))
 
