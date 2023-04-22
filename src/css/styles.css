@@ -11,12 +11,6 @@ body {
   font-family: 'Dosis', sans-serif;
 }
 
-.login-form{
-  /* border: red 1px solid; */
-  width: 40%;
-  height: 55%;
-}
-
 h1,
 h2,
 legend,
@@ -26,38 +20,12 @@ legend,
   color: #2e2c5f;
 }
 
-.scroll-lft-container{
-  direction: rtl;
-  overflow:auto;
-}
-
-.scroll-lft-item{
-  direction:ltr;
-}
-
-.bottom-right {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-  margin-right: 15px;
-  height: 350px;
-}
-
-.currency{
-  font-family: serif;
-}
-
-.larger {
-  height: 350px;
-}
-
-.smaller {
-  height: 200px;
-}
-
-.font-family {
-  font-weight: 800;
+h3 {
+  color: #9273DB;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  margin: 10px 0px 2px 0px;
 }
 
 .book-form,
@@ -72,13 +40,6 @@ legend,
   box-shadow: 0 4px 8px 0 rgba(36, 36, 36, 0.2), 0 6px 20px 0 rgba(36, 36, 36, 0.19);
 }
 
-
-
-nav {
-  background-color: #e4be55;
-  width: 20%;
-}
-
 .profile {
   display: flex;
   margin: 15px;
@@ -88,6 +49,11 @@ nav {
 .profile-icon {
   height: 25px;
   margin-right: 5px;
+}
+
+nav {
+  background-color: #e4be55;
+  width: 20%;
 }
 
 .nav-btns {
@@ -100,7 +66,7 @@ nav {
   height: 75px;
   margin: 5px 0px 5px 0px;
   color: white;
-  background-color:#DB8592;
+  background-color: #DB8592;
   font-weight: bold;
   font-size: .75rem;
   border: 0px;
@@ -108,7 +74,7 @@ nav {
   border-radius: 10px 0px 0px 10px;
 }
 
-.nav-btn:disabled{
+.nav-btn:disabled {
   background-color: #C1DAE2;
   color: #2e2c5f;
 }
@@ -117,6 +83,40 @@ nav {
 .nav-btn:focus {
   background-color: #9273DB;
   cursor: pointer;
+}
+
+.scroll-lft-container {
+  direction: rtl;
+  overflow: auto;
+}
+
+.scroll-lft-item {
+  direction: ltr;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  margin-right: 15px;
+  height: 350px;
+}
+
+.currency {
+  font-family: serif;
+}
+
+.larger {
+  height: 350px;
+}
+
+.smaller {
+  height: 200px;
+}
+
+.font-family {
+  font-weight: 800;
 }
 
 main {
@@ -197,14 +197,6 @@ td {
   flex-direction: column;
 }
 
-h3 {
-  color: #9273DB;
-  font-size: 25px;
-  font-weight: 700;
-  text-align: center;
-  margin: 10px 0px 2px 0px;
-}
-
 .country {
   margin: 0px 0px 5px 0px;
   text-align: center;
@@ -244,8 +236,8 @@ h3 {
   cursor: pointer;
 }
 
-.book-form, 
-.traveler-login{
+.book-form,
+.traveler-login {
   background-color: #C1DAE2;
   display: flex;
   flex-direction: column;
@@ -257,13 +249,34 @@ h3 {
   display: flex;
 }
 
-.login-form {
-  align-self: center;
-  margin-left: 10rem;
+.login-cont {
+  justify-content: center;
 }
 
-input[type=password]{
+.login-form {
+  border: #e4be55 4px solid;
+  background-color: white;
+  border-radius: .5rem;
+  width: 15rem;
+  height: 15rem;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form fieldset {
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  padding: .75rem;
+}
+
+input[type=password] {
   margin-bottom: 10px;
+}
+
+.login-submit {
+  align-self: center;
 }
 
 form {
@@ -303,11 +316,11 @@ input[type=password] {
   height: 18px;
 }
 
-.subtotal{
+.subtotal {
   margin: 10px 0px;
 }
 
-.trip-subtotal{
+.trip-subtotal {
   font-family: serif;
   font-weight: 900;
 }
@@ -334,8 +347,8 @@ input[type=submit]:hover {
   font-family: serif;
 }
 
-.form-dest-display{
-  width:50%;
+.form-dest-display {
+  width: 50%;
   display: flex;
   justify-content: center;
 }
@@ -357,12 +370,12 @@ input[type=submit]:hover {
   margin: 15px 0px;
 }
 
-.form-dest-text{
+.form-dest-text {
   margin: 0px;
   text-align: center;
 }
 
-.cancel{
+.cancel {
   height: 30px;
   width: 100%;
   border: 0px;
@@ -371,17 +384,16 @@ input[type=submit]:hover {
   font-weight: 700;
 }
 
-.cancel:hover{
+.cancel:hover {
   cursor: pointer;
-  background-color:#e4be55;
+  background-color: #e4be55;
   color: #07044E;
 }
 
-.confirmation{
+.confirmation {
   color: #07044E;
   font-size: 1rem;
 }
-
 
 .hidden {
   display: none;
