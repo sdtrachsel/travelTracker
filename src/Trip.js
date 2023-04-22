@@ -1,5 +1,3 @@
-import Destination from './Destination'
-
 class Trip {
     constructor(traveler, tripList) {
         this.traveler = traveler
@@ -11,7 +9,6 @@ class Trip {
         return this.allTrips.filter(trip => trip.status === status)
     }
     
-    // paramenters: upcoming or past
     findByTense(tense){
         const now = new Date ()
         now.setHours(0, 0, 0, 0)
