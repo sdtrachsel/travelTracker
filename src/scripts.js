@@ -1,77 +1,70 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import { getTravelerData, get, post, remove } from './apiCalls'
-import TravelerRepository from './TravelerRepository'
-import Traveler from './Traveler'
-import Trip from './Trip'
+import { getTravelerData, post } from './apiCalls'
+import Traveler from './Traveler';
+import Trip from './Trip';
 import Destination from './Destination';
 import formFeedbackMessage from './formFeedback';
-import './images/user-profile.png'
-import './images/traveler.png'
-import './images/traveler-trimmed.png'
+import './images/user-profile.png';
+import './images/traveler.png';
+import './images/traveler-trimmed.png';
 
-// Selectors
 
-//login page
-const loginDisplay = document.getElementById('travelerLoginDisplay')
-const loginForm = document.getElementById('loginForm')
-const username = document.getElementById('username')
-const userPassword = document.getElementById('password')
-const loginFeedback = document.getElementById('loginFeedback')
+// Login Page Selectors
+const loginDisplay = document.getElementById('travelerLoginDisplay');
+const loginForm = document.getElementById('loginForm');
+const username = document.getElementById('username');
+const userPassword = document.getElementById('password');
+const loginFeedback = document.getElementById('loginFeedback');
 
-const displayArea = document.getElementById('displayArea')
-const bookTripFormDisplay = document.getElementById('bookTripFormDisplay')
-const pages = document.querySelectorAll('.page')
-const navBtns = document.querySelectorAll('.nav-btn')
-const mainImage = document.getElementById('travelerImage')
-const viewHomeBtn = document.getElementById('viewHomeBtn');
-const viewPastBtn = document.getElementById('viewPastBtn');
-const viewPlanTripBtn = document.getElementById('viewPlanTripBtn');
-const loginName = document.getElementById('userName')
-const upComingTripTable = document.getElementById('upcomingTrps')
-const pastTripTable = document.getElementById('pastTrps')
-const userGreeting = document.getElementById('greeting')
-const tripAllTime = document.getElementById('totalSpent')
-const destinationCardDisplay = document.getElementById('destinationCards')
-const cancelTripBtn = document.getElementById('cancelTripBook')
+// Main View Selectors
+const displayArea = document.getElementById('displayArea');
+const mainImage = document.getElementById('travelerImage');
+const loginName = document.getElementById('userName');
+const panel = document.querySelectorAll('.page');
+const navTabs = document.querySelectorAll('.nav-btn');
+const viewHomeTab = document.getElementById('viewHomeBtn');
+const viewPastTab = document.getElementById('viewPastBtn');
+const viewPlanTripTab = document.getElementById('viewPlanTripBtn');
+const userGreeting = document.getElementById('greeting');
+const upComingTripTable = document.getElementById('upcomingTrps');
+const tripAllTime = document.getElementById('totalSpent');
+const pastTripTable = document.getElementById('pastTrps');
+const destinationCardDisplay = document.getElementById('destinationCards');
 
-// Form Selectors
-const bookTripForm = document.getElementById('bookTripForm')
-const formDestinationCard = document.getElementById('formDestCard')
-const formDestinationId = document.getElementById('formDestinationId')
-const formDestination = document.getElementById('formDestination')
-const formDate = document.getElementById('formDate')
-const formDuration = document.getElementById('formDuration')
-const formTravelers = document.getElementById('formTravelers')
-const formSubTotal = document.getElementById('tripSubTotal')
-const formFeedback = document.getElementById('formFeedback')
-const formConfirmDisplay = document.getElementById('confirmationDisplay')
-const formConfirmDest = document.getElementById('confirmDest')
-const formConfirmCloseBtn = document.getElementById('confirmationCloseBtn')
+// Book Trip Form Selectors
+const cancelTripBtn = document.getElementById('cancelTripBook');
+const bookTripFormDisplay = document.getElementById('bookTripFormDisplay');
+const bookTripForm = document.getElementById('bookTripForm');
+const formDestinationCard = document.getElementById('formDestCard');
+const formDestinationId = document.getElementById('formDestinationId');
+const formDestination = document.getElementById('formDestination');
+const formDate = document.getElementById('formDate');
+const formDuration = document.getElementById('formDuration');
+const formTravelers = document.getElementById('formTravelers');
+const formSubTotal = document.getElementById('tripSubTotal');
+const formFeedback = document.getElementById('formFeedback');
+const formConfirmDisplay = document.getElementById('confirmationDisplay');
+const formConfirmDest = document.getElementById('confirmDest');
+const formConfirmCloseBtn = document.getElementById('confirmationCloseBtn');
 
-let allTravelers;
 let allDestinations;
 let currentUser;
 let currentUserTrips;
 
-
 loginForm.addEventListener('submit', () => {
-    event.preventDefault()
-    userLogin()
+    event.preventDefault();
+    userLogin();
 })
-
-viewHomeBtn.addEventListener('click', (event) => {
-    changePage(event.target.id, 'homeDisplay')
+viewHomeTab.addEventListener('click', (event) => {
+    changePanel(event.target.id, 'homeDisplay');
 })
-
-viewPastBtn.addEventListener('click', (event) => {
-    changePage(event.target.id, 'pastDisplay');
-})
-
-viewPlanTripBtn.addEventListener('click', (event) => {
-    changePage(event.target.id, 'planTripDisplay');
-})
-
+viewPastTab.addEventListener('click', (event) => {
+    changePanel(event.target.id, 'pastDisplay');
+});
+viewPlanTripTab.addEventListener('click', (event) => {
+    changePanel(event.target.id, 'planTripDisplay');
+});
 cancelTripBtn.addEventListener('click', cancelBookTripForm);
 formDuration.addEventListener('input', calculateSubtotal);
 formTravelers.addEventListener('input', calculateSubtotal);
@@ -84,40 +77,35 @@ formConfirmCloseBtn.addEventListener('click', confirmClose);
 
 function userLogin() {
     const travelerId = getTravelerId(username.value);
-    const travelerPw = password.value
-    console.log('usName', validateUserName(travelerId))
-    console.log('uPass', validatePassword(travelerPw))
+    const travelerPw = password.value;
+
     if (validateUserName(travelerId) && validatePassword(travelerPw)) {
-        // get api information
         getTravelerData(travelerId)
             .then(data => {
-                console.log(data)
-                currentUser = new Traveler(data[0])
-                currentUserTrips = new Trip(data[0], data[2].trips)
-                allDestinations = new Destination(data[1].destinations)
-
-                populateUponLogin()
-                changePage('viewHomeBtn', 'homeDisplay')
+                console.log('in then')
+                currentUser = new Traveler(data[0]);
+                currentUserTrips = new Trip(data[0], data[2].trips);
+                allDestinations = new Destination(data[1].destinations);
+                populateUponLogin();
+                changePanel('viewHomeBtn', 'homeDisplay');
                 loginDisplay.classList.add('hidden');
                 displayArea.classList.remove('hidden');
-
             })
             .catch(err => {
-                console.log(err)
                 if (err === 422) {
-                    loginFeedback.innerText = `incatch ${formFeedbackMessage['invalidLogin']}`;;
+                    loginFeedback.innerText = `in catch 96 ${formFeedbackMessage['invalidLogin']}`;
                 } else {
-                    loginFeedback.innerText = `in catch${formFeedbackMessage['other']}`;;
+                    loginFeedback.innerText = `in catch 98 ${formFeedbackMessage['other']}`;
                 }
-                clearLoginFields()
+                clearLoginFields();
             });
     }
 }
 
 function getTravelerId(username) {
-    const travelerId = Number(username.slice(8))
+    const travelerId = Number(username.slice(8));
 
-    return travelerId
+    return travelerId;
 }
 
 function validateUserName(id) {
@@ -143,16 +131,15 @@ function clearLoginFields() {
     username.value = '';
 }
 
-
-function changePage(targetId, panelId) {
-    updateTabs(targetId)
-    updateTabPanels(panelId)
+function changePanel(targetId, panelId) {
+    updateTabs(targetId);
+    updateTabPanels(panelId);
 }
 
 function updateTabs(targetId) {
     const selectedTab = document.getElementById(targetId);
 
-    navBtns.forEach((btn) => {
+    navTabs.forEach((btn) => {
         btn.ariaSelected = 'false';
         btn.disabled = false;
     })
@@ -163,7 +150,7 @@ function updateTabs(targetId) {
 
 function updateTabPanels(panelId) {
     const selectedPanel = document.getElementById(panelId)
-    pages.forEach((page) => {
+    panel.forEach((page) => {
         page.hidden = true;
     })
 
@@ -187,9 +174,9 @@ function changeMainImage(size) {
 
 function populateUponLogin() {
     loginName.innerText = `${currentUser.travelerName}`;
-    populateHomePage()
-    populatePastPage()
-    populatePlanTripPage()
+    populateHomePage();
+    populatePastPage();
+    populatePlanTripPage();
 }
 
 function populateHomePage() {
@@ -204,11 +191,11 @@ function populatePastPage() {
 
 function populatePlanTripPage() {
     createDestinationCards(allDestinations.allDestinations)
-    addBookBtnsListeners()
+    addBookBtnsListeners();
 }
 
 function createTripsTable(table, tripList) {
-    table.innerHTML = ''
+    table.innerHTML = '';
 
     table.innerHTML += `
         <tr>
@@ -220,7 +207,7 @@ function createTripsTable(table, tripList) {
          </tr>`;
 
     tripList.forEach(trip => {
-        let destination = allDestinations.findById(trip.destinationID)
+        let destination = allDestinations.findById(trip.destinationID);
         table.innerHTML += `
             <tr>
                  <td>${trip.status}</td>
@@ -260,7 +247,7 @@ function createDestinationCards(destinations) {
     destinationCardDisplay.innerHTML = '';
 
     destinations.forEach((destination) => {
-        const destinationLocation = destination.destination.split(',')
+        const destinationLocation = destination.destination.split(',');
 
         destinationCardDisplay.innerHTML += `
         <section class="dest-card scroll-lft-item">
@@ -277,25 +264,25 @@ function createDestinationCards(destinations) {
 }
 
 function addBookBtnsListeners() {
-    const destinationBtns = document.querySelectorAll('.dest-book-btn')
+    const destinationBtns = document.querySelectorAll('.dest-book-btn');
 
     destinationBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
-            displayForm(event)
+            displayForm(event);
         })
     })
 }
 
 function displayForm(event) {
-    prePopulateForm(event)
-    displayArea.classList.add('hidden')
-    bookTripFormDisplay.classList.remove('hidden')
+    prePopulateForm(event);
+    displayArea.classList.add('hidden');
+    bookTripFormDisplay.classList.remove('hidden');
 }
 
 function cancelBookTripForm() {
-    bookTripFormDisplay.classList.add('hidden')
-    displayArea.classList.remove('hidden')
-    clearBookTripForm()
+    bookTripFormDisplay.classList.add('hidden');
+    displayArea.classList.remove('hidden');
+    clearBookTripForm();
 }
 
 function clearBookTripForm() {
@@ -377,20 +364,20 @@ function submitTripForm() {
 }
 
 function declareTripBooked(trip) {
-    formConfirmDest.innerText = `${allDestinations.findById(trip.destinationID).destination}`
-    formConfirmDisplay.classList.remove('hidden')
-    bookTripForm.classList.add('hidden')
+    formConfirmDest.innerText = `${allDestinations.findById(trip.destinationID).destination}`;
+    formConfirmDisplay.classList.remove('hidden');
+    bookTripForm.classList.add('hidden');
     clearBookTripForm();
-    cancelTripBtn.classList.add('hidden')
+    cancelTripBtn.classList.add('hidden');
 }
 
 function confirmClose() {
-    formConfirmDest.innerText = ''
-    formConfirmDisplay.classList.add('hidden')
-    bookTripForm.classList.remove('hidden')
-    cancelTripBtn.classList.remove('hidden')
-    bookTripFormDisplay.classList.add('hidden')
-    displayArea.classList.remove('hidden')
+    formConfirmDest.innerText = '';
+    formConfirmDisplay.classList.add('hidden');
+    bookTripForm.classList.remove('hidden');
+    cancelTripBtn.classList.remove('hidden');
+    bookTripFormDisplay.classList.add('hidden');
+    displayArea.classList.remove('hidden');
 }
 
 function displayFormFeedback(type) {
