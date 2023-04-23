@@ -353,8 +353,8 @@ function submitTripForm() {
             .then((json) => {
                 currentUserTrips.addNewTrip(trip)
                 declareTripBooked(trip);
-                populateHomePage();
-
+                createTripsTable(upComingTripTable, currentUserTrips.findByTense('upcoming'));
+                updateAllTimeTripCost();
             })
             .catch(err => {
                 if (err === 422) {
