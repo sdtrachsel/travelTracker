@@ -85,15 +85,6 @@ nav {
   cursor: pointer;
 }
 
-.scroll-lft-container {
-  direction: rtl;
-  overflow: auto;
-}
-
-.scroll-lft-item {
-  direction: ltr;
-}
-
 .bottom-right {
   position: absolute;
   bottom: 0;
@@ -101,14 +92,19 @@ nav {
   z-index: 1;
   margin-right: 15px;
   height: 350px;
+  pointer-events: none;
 }
 
 .currency {
   font-family: serif;
 }
 
+.trvlr {
+  transition: height 0.5s ease;
+}
+
 .larger {
-  height: 350px;
+  height: 340px;
 }
 
 .smaller {

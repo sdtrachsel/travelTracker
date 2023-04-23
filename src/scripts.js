@@ -248,7 +248,7 @@ function createDestinationCards(destinations) {
         const destinationLocation = destination.destination.split(',');
 
         destinationCardDisplay.innerHTML += `
-        <section class="dest-card scroll-lft-item">
+        <section class="dest-card">
             <h3>${destinationLocation[0]}</h3>
             <p class="country">${destinationLocation[1]}</p>
             <img class="destImg" src="${destination.image}" alt="${destination.alt}">
