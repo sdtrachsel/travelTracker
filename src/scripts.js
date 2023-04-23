@@ -285,9 +285,10 @@ function cancelBookTripForm() {
 
 
 function clearForm(form){
-    console.log(form.elements[1])
-    form.elements.forEach((element)=> {
-        if(element.tagName === 'INPUT'){
+    const elements = Array.from(form.elements)
+
+    elements.forEach((element)=> {
+        if(element.tagName === 'INPUT' && element.type !== 'submit'){
             element.value = '';
         }
     })
