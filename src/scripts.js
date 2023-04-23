@@ -72,7 +72,7 @@ bookTripForm.addEventListener('submit', () => {
     submitTripForm();
 })
 
-formConfirmCloseBtn.addEventListener('click', confirmClose);
+formConfirmCloseBtn.addEventListener('click', closeConfirmation);
 
 function userLogin() {
     const travelerId = getTravelerId(username.value);
@@ -81,22 +81,22 @@ function userLogin() {
     if (validateUserName(travelerId) && validatePassword(travelerPw)) {
         getTravelerData(travelerId)
             .then(data => {
-                console.log('in then')
                 currentUser = new Traveler(data[0]);
                 currentUserTrips = new Trip(data[0], data[2].trips);
                 allDestinations = new Destination(data[1].destinations);
                 populateUponLogin();
                 changePanel('viewHomeBtn', 'homeDisplay');
-                loginDisplay.classList.add('hidden');
-                displayArea.classList.remove('hidden');
+                hide(loginDisplay);
+                show(displayArea);
+                clearLoginFields()
             })
             .catch(err => {
-                if (err === 422) {
-                    loginFeedback.innerText = `in catch 96 ${formFeedbackMessage['invalidLogin']}`;
-                } else {
-                    loginFeedback.innerText = `in catch 98 ${formFeedbackMessage['other']}`;
-                }
-                clearLoginFields();
+                console.log(err.message)
+                if (err.message === '404') {
+                    setFormFeedback(loginFeedback, 'invalidLogin')
+                  } else {
+                    setFormFeedback(loginFeedback, 'other');
+                 }
             });
     }
 }
@@ -109,8 +109,7 @@ function getTravelerId(username) {
 
 function validateUserName(id) {
     if (!id) {
-        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
-        clearLoginFields();
+        setFormFeedback(loginFeedback, 'invalidLogin');
     } else {
         return true;
     }
@@ -118,16 +117,15 @@ function validateUserName(id) {
 
 function validatePassword(password) {
     if (password !== 'travel') {
-        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
-        clearLoginFields();
+        setFormFeedback(loginFeedback, 'invalidLogin');
     } else {
         return true;
     }
 }
 
 function clearLoginFields() {
-    userPassword.value = '';
-    username.value = '';
+    clearFormField(userPassword)
+    clearFormField(username)
 }
 
 function changePanel(targetId, panelId) {
@@ -172,14 +170,14 @@ function changeMainImage(size) {
 }
 
 function populateUponLogin() {
-    loginName.innerText = `${currentUser.travelerName}`;
+    setText(loginName, currentUser.travelerName)
     populateHomePage();
     populatePastPage();
     populatePlanTripPage();
 }
 
 function populateHomePage() {
-    userGreeting.innerText = `Welcome back ${currentUser.findFirstName()}!`;
+    setText(userGreeting,`Welcome back ${currentUser.findFirstName()}!`)
     createTripsTable(upComingTripTable, currentUserTrips.findByTense('upcoming'));
     updateAllTimeTripCost();
 }
@@ -205,11 +203,12 @@ function createTripsTable(table, tripList) {
          </tr>`;
 
     tripList.forEach(trip => {
-        let destination = allDestinations.findById(trip.destinationID);
+        let destination = allDestinations.findById(trip.destinationID).destination;
+        let city = destination.split(',')[0]
         table.innerHTML += `
             <tr>
                  <td>${trip.status}</td>
-                 <td>${destination.destination}</td>
+                 <td>${city}</td>
                  <td>${formatDateUser(trip.date)}</td>
                  <td>${trip.duration}</td>
                 <td>${trip.travelers}</td>
@@ -219,7 +218,8 @@ function createTripsTable(table, tripList) {
 
 function updateAllTimeTripCost() {
     const total = currentUserTrips.calulateAllTimeCost(allDestinations);
-    tripAllTime.innerText = `${numberToDollar(total)}`;
+
+    setText(tripAllTime, numberToDollar(total))
 }
 
 function numberToDollar(num) {
@@ -234,11 +234,11 @@ function numberToDollar(num) {
 
 function formatDateUser(apiDate) {
     const date = apiDate.split('/');
-    let day = date[1];
-    let month = date[2];
+    let month = date[1];
+    let day = date[2];
     let year = date[0];
 
-    return (`${day}/${month}/${year}`);
+    return (`${month}/${day}/${year}`);
 };
 
 function createDestinationCards(destinations) {
@@ -273,30 +273,37 @@ function addBookBtnsListeners() {
 
 function displayForm(event) {
     prePopulateForm(event);
-    displayArea.classList.add('hidden');
-    bookTripFormDisplay.classList.remove('hidden');
+    hide(displayArea);
+    show(bookTripFormDisplay);
 }
 
 function cancelBookTripForm() {
-    bookTripFormDisplay.classList.add('hidden');
-    displayArea.classList.remove('hidden');
+    hide(bookTripFormDisplay);
+    show(displayArea);
     clearBookTripForm();
 }
 
-function clearBookTripForm() {
-    formDate.value = '';
-    formDestination.value = '';
-    formDuration.value = '';
-    formTravelers.value = '';
-    formSubTotal.innerText = '';
+
+function clearForm(form){
+    const elements = Array.from(form.elements)
+
+    elements.forEach((element)=> {
+        if(element.tagName === 'INPUT' && element.type !== 'submit'){
+            element.value = '';
+        }
+    })
 }
+
+function clearBookTripForm() {
+    clearForm(bookTripForm)
+    setText(formSubTotal, '')
+   }
 
 function prePopulateForm(event) {
     const id = Number(event.target.id);
     const chosenDestination = allDestinations.findById(id);
-    formDestinationId.value = id;
-    formDestination.value = chosenDestination.destination;
-
+    setFormField(formDestinationId, id)
+    setFormField(formDestination, chosenDestination.destination)
     createFormDestCard(chosenDestination);
     setFormMinDate();
 }
@@ -317,7 +324,7 @@ function calculateSubtotal() {
     const subTotal = allDestinations.calculateDestinationCost(id, travelers, duration);
 
     if (subTotal && travelers > 0 && duration > 0) {
-        formSubTotal.innerText = `${numberToDollar(subTotal)}`;
+        setText(formSubTotal, numberToDollar(subTotal))
     }
 }
 
@@ -347,8 +354,8 @@ function submitTripForm() {
             .then((json) => {
                 currentUserTrips.addNewTrip(trip)
                 declareTripBooked(trip);
-                populateHomePage();
-
+                createTripsTable(upComingTripTable, currentUserTrips.findByTense('upcoming'));
+                updateAllTimeTripCost();
             })
             .catch(err => {
                 if (err === 422) {
@@ -362,24 +369,21 @@ function submitTripForm() {
 }
 
 function declareTripBooked(trip) {
-    formConfirmDest.innerText = `${allDestinations.findById(trip.destinationID).destination}`;
-    formConfirmDisplay.classList.remove('hidden');
-    bookTripForm.classList.add('hidden');
+    const destinationName = allDestinations.findById(trip.destinationID).destination;
+    setText(formConfirmDest, destinationName);
+    show(formConfirmDisplay);
+    hide(bookTripForm);
     clearBookTripForm();
-    cancelTripBtn.classList.add('hidden');
+    hide(cancelTripBtn);
 }
 
-function confirmClose() {
-    formConfirmDest.innerText = '';
-    formConfirmDisplay.classList.add('hidden');
-    bookTripForm.classList.remove('hidden');
-    cancelTripBtn.classList.remove('hidden');
-    bookTripFormDisplay.classList.add('hidden');
-    displayArea.classList.remove('hidden');
-}
-
-function displayFormFeedback(type) {
-    formFeedback.innerText = formFeedbackMessage[type];
+function closeConfirmation() {
+    setText(formConfirmDest, '')
+    hide(formConfirmDisplay)
+    show(bookTripForm)
+    show(cancelTripBtn)
+    hide(bookTripFormDisplay)
+    show(displayArea)
 }
 
 function validateDate() {
@@ -425,11 +429,38 @@ function validateDuration() {
 }
 
 function validateTravelers() {
-    ;
     const travelerCount = Number(formTravelers.value);
     if (typeof travelerCount === 'number' && travelerCount <= 20 && travelerCount > 0) {
         return true;
     } else {
         displayFormFeedback('invalidTravelers');
     }
+}
+
+function setFormFeedback(feedback, type){
+    setText(feedback, formFeedbackMessage[type]);
+}
+
+function setText(field, text){
+    field.innerText = text;
+}
+
+function displayFormFeedback(type) {
+    formFeedback.innerText = formFeedbackMessage[type];
+}
+
+function clearFormField(field){
+    field.value = '';
+}
+
+function setFormField(field, newValue){
+    field.value = newValue;
+}
+
+function show(element){
+    element.classList.remove('hidden');
+}
+
+function hide(element){
+    element.classList.add('hidden');
 }

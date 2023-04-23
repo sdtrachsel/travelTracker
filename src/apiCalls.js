@@ -1,8 +1,14 @@
 const baseUrl = 'http://localhost:3001/api/v1/';
 
 const get = (url) => {
-    return fetch(baseUrl + url).then((response) => response.json());
-}
+    return fetch(baseUrl + url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      });
+  };
 
 const getTravelerData = (travlerId) => {
     return Promise.all([
