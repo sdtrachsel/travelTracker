@@ -72,7 +72,7 @@ bookTripForm.addEventListener('submit', () => {
     submitTripForm();
 })
 
-formConfirmCloseBtn.addEventListener('click', confirmClose);
+formConfirmCloseBtn.addEventListener('click', closeConfirmation);
 
 function userLogin() {
     const travelerId = getTravelerId(username.value);
@@ -176,7 +176,7 @@ function populateUponLogin() {
 }
 
 function populateHomePage() {
-    userGreeting.innerText = `Welcome back ${currentUser.findFirstName()}!`;
+    setText(userGreeting,`Welcome back ${currentUser.findFirstName()}!`)
     createTripsTable(upComingTripTable, currentUserTrips.findByTense('upcoming'));
     updateAllTimeTripCost();
 }
@@ -219,7 +219,6 @@ function updateAllTimeTripCost() {
     const total = currentUserTrips.calulateAllTimeCost(allDestinations);
 
     setText(tripAllTime, numberToDollar(total))
-    // tripAllTime.innerText = `${numberToDollar(total)}`;
 }
 
 function numberToDollar(num) {
@@ -273,13 +272,13 @@ function addBookBtnsListeners() {
 
 function displayForm(event) {
     prePopulateForm(event);
-    displayArea.classList.add('hidden');
-    bookTripFormDisplay.classList.remove('hidden');
+    hide(displayArea);
+    show(bookTripFormDisplay);
 }
 
 function cancelBookTripForm() {
-    bookTripFormDisplay.classList.add('hidden');
-    displayArea.classList.remove('hidden');
+    hide(bookTripFormDisplay);
+    show(displayArea);
     clearBookTripForm();
 }
 
@@ -296,15 +295,14 @@ function clearForm(form){
 
 function clearBookTripForm() {
     clearForm(bookTripForm)
-    formSubTotal.innerText = '';
-}
+    setText(formSubTotal, '')
+   }
 
 function prePopulateForm(event) {
     const id = Number(event.target.id);
     const chosenDestination = allDestinations.findById(id);
-    formDestinationId.value = id;
-    formDestination.value = chosenDestination.destination;
-
+    setFormField(formDestinationId, id)
+    setFormField(formDestination, chosenDestination.destination)
     createFormDestCard(chosenDestination);
     setFormMinDate();
 }
@@ -325,7 +323,7 @@ function calculateSubtotal() {
     const subTotal = allDestinations.calculateDestinationCost(id, travelers, duration);
 
     if (subTotal && travelers > 0 && duration > 0) {
-        formSubTotal.innerText = `${numberToDollar(subTotal)}`;
+        setText(formSubTotal, numberToDollar(subTotal))
     }
 }
 
@@ -370,20 +368,21 @@ function submitTripForm() {
 }
 
 function declareTripBooked(trip) {
-    formConfirmDest.innerText = `${allDestinations.findById(trip.destinationID).destination}`;
-    formConfirmDisplay.classList.remove('hidden');
-    bookTripForm.classList.add('hidden');
+    const destinationName = allDestinations.findById(trip.destinationID).destination;
+    setText(formConfirmDest, destinationName);
+    show(formConfirmDisplay);
+    hide(bookTripForm);
     clearBookTripForm();
-    cancelTripBtn.classList.add('hidden');
+    hide(cancelTripBtn);
 }
 
-function confirmClose() {
-    formConfirmDest.innerText = '';
-    formConfirmDisplay.classList.add('hidden');
-    bookTripForm.classList.remove('hidden');
-    cancelTripBtn.classList.remove('hidden');
-    bookTripFormDisplay.classList.add('hidden');
-    displayArea.classList.remove('hidden');
+function closeConfirmation() {
+    setText(formConfirmDest, '')
+    hide(formConfirmDisplay)
+    show(bookTripForm)
+    show(cancelTripBtn)
+    hide(bookTripFormDisplay)
+    show(displayArea)
 }
 
 /////////// new 
@@ -401,6 +400,7 @@ function setText(field, text){
 }
 ///////////////////
 // change tab listners to a for each
+// clear innerHtml?
 
 
 function displayFormFeedback(type) {
@@ -411,8 +411,8 @@ function clearFormField(field){
     field.value = '';
 }
 
-function setFormField(field, value){
-    
+function setFormField(field, newValue){
+    field.value = newValue
 }
 
 function show(element){
