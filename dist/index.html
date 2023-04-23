@@ -36,7 +36,7 @@
   </section>
   <section class="wrapper hidden" id="displayArea">
     <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving"
-      class="bottom-right larger" id="travelerImage">
+      class="trvlr bottom-right larger" id="travelerImage">
     <nav>
       <section class="profile">
         <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
@@ -55,9 +55,20 @@
       <section class="page" id="homeDisplay" role="tabpanel">
         <h1 id="greeting" class=""> Welcome </h1>
         <p>Check out your upcoming trips:</p>
-        <div>
-          <table id="upcomingTrps">
-            <!-- upcoming trips here -->
+        <div class="table-container up-cont">
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Destination</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Travelers</th>
+              </tr>
+            </thead>
+            <tbody id="upcomingTrps">
+              <!-- upcoming trips here -->
+            </tbody>
           </table>
         </div>
         <p class="rewards">Our rewards program gives you more of what you love, <span
@@ -68,12 +79,26 @@
       </section>
       <section class="page" id="pastDisplay" role="tabpanel" hidden>
         <h2 class="past-head">Your Past Trips</h2>
-        <table id="pastTrps">
-        </table>
+        <div class="table-container past-cont">
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Destination</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Travelers</th>
+              </tr>
+            </thead>
+            <tbody id="pastTrps">
+              <!-- upcoming trips here -->
+            </tbody>
+          </table>
+        </div>
       </section>
       <section class="page plan-display" id="planTripDisplay" role="tabpanel" hidden>
         <h2>Choose Your Next Destination</h2>
-        <section class="destination-listings scroll-lft-container" id="destinationCards">
+        <section class="destination-listings" id="destinationCards">
           <!-- destination cards -->
         </section>
       </section>
