@@ -81,22 +81,21 @@ function userLogin() {
     if (validateUserName(travelerId) && validatePassword(travelerPw)) {
         getTravelerData(travelerId)
             .then(data => {
-                console.log('in then')
                 currentUser = new Traveler(data[0]);
                 currentUserTrips = new Trip(data[0], data[2].trips);
                 allDestinations = new Destination(data[1].destinations);
                 populateUponLogin();
                 changePanel('viewHomeBtn', 'homeDisplay');
-                loginDisplay.classList.add('hidden');
-                displayArea.classList.remove('hidden');
+                hide(loginDisplay);
+                show(displayArea);
             })
             .catch(err => {
                 if (err === 422) {
-                    loginFeedback.innerText = `in catch 96 ${formFeedbackMessage['invalidLogin']}`;
+                    declareInvalidLogin();
                 } else {
-                    loginFeedback.innerText = `in catch 98 ${formFeedbackMessage['other']}`;
+                    setFormFeedback(loginFeedback, 'other')
+                    clearLoginFields();
                 }
-                clearLoginFields();
             });
     }
 }
@@ -109,8 +108,7 @@ function getTravelerId(username) {
 
 function validateUserName(id) {
     if (!id) {
-        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
-        clearLoginFields();
+        declareInvalidLogin();
     } else {
         return true;
     }
@@ -118,16 +116,15 @@ function validateUserName(id) {
 
 function validatePassword(password) {
     if (password !== 'travel') {
-        loginFeedback.innerText = `${formFeedbackMessage['invalidLogin']}`;
-        clearLoginFields();
+        declareInvalidLogin();
     } else {
         return true;
     }
 }
 
 function clearLoginFields() {
-    userPassword.value = '';
-    username.value = '';
+    clearFormField(userPassword)
+    clearFormField(username)
 }
 
 function changePanel(targetId, panelId) {
@@ -172,7 +169,7 @@ function changeMainImage(size) {
 }
 
 function populateUponLogin() {
-    loginName.innerText = `${currentUser.travelerName}`;
+    setText(loginName, currentUser.travelerName)
     populateHomePage();
     populatePastPage();
     populatePlanTripPage();
@@ -205,11 +202,12 @@ function createTripsTable(table, tripList) {
          </tr>`;
 
     tripList.forEach(trip => {
-        let destination = allDestinations.findById(trip.destinationID);
+        let destination = allDestinations.findById(trip.destinationID).destination;
+        let city = destination.split(',')[0]
         table.innerHTML += `
             <tr>
                  <td>${trip.status}</td>
-                 <td>${destination.destination}</td>
+                 <td>${city}</td>
                  <td>${formatDateUser(trip.date)}</td>
                  <td>${trip.duration}</td>
                 <td>${trip.travelers}</td>
@@ -219,7 +217,9 @@ function createTripsTable(table, tripList) {
 
 function updateAllTimeTripCost() {
     const total = currentUserTrips.calulateAllTimeCost(allDestinations);
-    tripAllTime.innerText = `${numberToDollar(total)}`;
+
+    setText(tripAllTime, numberToDollar(total))
+    // tripAllTime.innerText = `${numberToDollar(total)}`;
 }
 
 function numberToDollar(num) {
@@ -234,11 +234,11 @@ function numberToDollar(num) {
 
 function formatDateUser(apiDate) {
     const date = apiDate.split('/');
-    let day = date[1];
-    let month = date[2];
+    let month = date[1];
+    let day = date[2];
     let year = date[0];
 
-    return (`${day}/${month}/${year}`);
+    return (`${month}/${day}/${year}`);
 };
 
 function createDestinationCards(destinations) {
@@ -283,11 +283,18 @@ function cancelBookTripForm() {
     clearBookTripForm();
 }
 
+
+function clearForm(form){
+    console.log(form.elements[1])
+    form.elements.forEach((element)=> {
+        if(element.tagName === 'INPUT'){
+            element.value = '';
+        }
+    })
+}
+
 function clearBookTripForm() {
-    formDate.value = '';
-    formDestination.value = '';
-    formDuration.value = '';
-    formTravelers.value = '';
+    clearForm(bookTripForm)
     formSubTotal.innerText = '';
 }
 
@@ -378,8 +385,41 @@ function confirmClose() {
     displayArea.classList.remove('hidden');
 }
 
+/////////// new 
+function declareInvalidLogin(){
+    setFormFeedback(loginFeedback, 'invalidLogin')
+    clearLoginFields();
+}
+
+function setFormFeedback(feedback, type){
+    setText(feedback, formFeedbackMessage[type])
+}
+
+function setText(field, text){
+    field.innerText = text;
+}
+///////////////////
+// change tab listners to a for each
+
+
 function displayFormFeedback(type) {
     formFeedback.innerText = formFeedbackMessage[type];
+}
+
+function clearFormField(field){
+    field.value = '';
+}
+
+function setFormField(field, value){
+    
+}
+
+function show(element){
+    element.classList.remove('hidden')
+}
+
+function hide(element){
+    element.classList.add('hidden')
 }
 
 function validateDate() {
