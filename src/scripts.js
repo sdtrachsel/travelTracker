@@ -384,43 +384,15 @@ function closeConfirmation() {
     hide(bookTripFormDisplay)
     show(displayArea)
 }
-
-/////////// new 
-function declareInvalidLogin(){
-    setFormFeedback(loginFeedback, 'invalidLogin')
-    clearLoginFields();
-}
-
-function setFormFeedback(feedback, type){
-    setText(feedback, formFeedbackMessage[type])
-}
-
-function setText(field, text){
-    field.innerText = text;
-}
 ///////////////////
 // change tab listners to a for each
 // clear innerHtml?
 
 
-function displayFormFeedback(type) {
-    formFeedback.innerText = formFeedbackMessage[type];
-}
-
-function clearFormField(field){
-    field.value = '';
-}
-
-function setFormField(field, newValue){
-    field.value = newValue
-}
-
-function show(element){
-    element.classList.remove('hidden')
-}
-
-function hide(element){
-    element.classList.add('hidden')
+/////////// new 
+function declareInvalidLogin(){
+    setFormFeedback(loginFeedback, 'invalidLogin')
+    clearLoginFields();
 }
 
 function validateDate() {
@@ -466,11 +438,38 @@ function validateDuration() {
 }
 
 function validateTravelers() {
-    ;
     const travelerCount = Number(formTravelers.value);
     if (typeof travelerCount === 'number' && travelerCount <= 20 && travelerCount > 0) {
         return true;
     } else {
         displayFormFeedback('invalidTravelers');
     }
+}
+
+function setFormFeedback(feedback, type){
+    setText(feedback, formFeedbackMessage[type]);
+}
+
+function setText(field, text){
+    field.innerText = text;
+}
+
+function displayFormFeedback(type) {
+    formFeedback.innerText = formFeedbackMessage[type];
+}
+
+function clearFormField(field){
+    field.value = '';
+}
+
+function setFormField(field, newValue){
+    field.value = newValue;
+}
+
+function show(element){
+    element.classList.remove('hidden');
+}
+
+function hide(element){
+    element.classList.add('hidden');
 }
