@@ -121,8 +121,22 @@ main {
   width: 80%;
 }
 
+.table-container{
+  overflow-y:auto;
+  width: 75%;
+  margin-bottom: 20px;
+}
+
+.up-cont{
+  max-height: 8rem;
+}
+
+.past-cont{
+  max-height: 16rem;
+}
+
 table {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
@@ -134,6 +148,8 @@ th {
   font-weight: 600;
   font-size: 18px;
   text-align: center;
+  position: sticky;
+  top:0
 }
 
 td {

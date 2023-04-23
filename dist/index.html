@@ -55,10 +55,21 @@
       <section class="page" id="homeDisplay" role="tabpanel">
         <h1 id="greeting" class=""> Welcome </h1>
         <p>Check out your upcoming trips:</p>
-        <div>
-          <table id="upcomingTrps">
-            <!-- upcoming trips here -->
-          </table>
+        <div class ="table-container up-cont">
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Destination</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Travelers</th>
+              </tr>
+            </thead>
+            <tbody id="upcomingTrps">
+            <!-- upcoming trips here -->  
+            </tbody>
+            </table>
         </div>
         <p class="rewards">Our rewards program gives you more of what you love, <span
             class="emphasize">ADVENTURE!</span></p>
@@ -68,8 +79,22 @@
       </section>
       <section class="page" id="pastDisplay" role="tabpanel" hidden>
         <h2 class="past-head">Your Past Trips</h2>
-        <table id="pastTrps">
-        </table>
+        <div class ="table-container past-cont">
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Destination</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Travelers</th>
+              </tr>
+            </thead>
+            <tbody id="pastTrps">
+            <!-- upcoming trips here -->  
+            </tbody>
+            </table>
+        </div>
       </section>
       <section class="page plan-display" id="planTripDisplay" role="tabpanel" hidden>
         <h2>Choose Your Next Destination</h2>

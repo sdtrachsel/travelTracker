@@ -91,7 +91,6 @@ function userLogin() {
                 clearLoginFields()
             })
             .catch(err => {
-                console.log(err.message)
                 if (err.message === '404') {
                     setFormFeedback(loginFeedback, 'invalidLogin')
                   } else {
@@ -193,14 +192,7 @@ function populatePlanTripPage() {
 
 function createTripsTable(table, tripList) {
     table.innerHTML = '';
-    table.innerHTML += `
-        <tr>
-            <th>Status</th>
-            <th>Destination</th>
-            <th>Date</th>
-            <th>Duration</th>
-            <th>Travelers</th>
-         </tr>`;
+    
 
     tripList.forEach(trip => {
         let destination = allDestinations.findById(trip.destinationID).destination;
