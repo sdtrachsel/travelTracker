@@ -125,6 +125,18 @@ main {
   overflow-y:auto;
   width: 75%;
   margin-bottom: 20px;
+  scrollbar-color: #DB8592 #e4be55;
+}
+
+.table-container::-webkit-scrollbar{
+  border-radius: 5px;
+  background-color: #e4be55;
+}
+
+.table-container::-webkit-scrollbar-thumb{
+  background-color: #DB8592;
+  border-radius: 5px;
+  height: .5rem;
 }
 
 .up-cont{
@@ -142,8 +154,8 @@ table {
 }
 
 th {
-  color: #f9f9f9;
-  background-color: #9273DB;
+  color: #07044E;
+  background-color: #C1DAE2;
   border-bottom: #DB8592 4px solid;
   font-weight: 600;
   font-size: 18px;
