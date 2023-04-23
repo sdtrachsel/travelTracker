@@ -193,7 +193,6 @@ function populatePlanTripPage() {
 function createTripsTable(table, tripList) {
     table.innerHTML = '';
     
-
     tripList.forEach(trip => {
         let destination = allDestinations.findById(trip.destinationID).destination;
         let city = destination.split(',')[0]
@@ -211,7 +210,7 @@ function createTripsTable(table, tripList) {
 function updateAllTimeTripCost() {
     const total = currentUserTrips.calulateAllTimeCost(allDestinations);
 
-    setText(tripAllTime, numberToDollar(total))
+    setText(tripAllTime, numberToDollar(total));
 }
 
 function numberToDollar(num) {
@@ -301,8 +300,10 @@ function prePopulateForm(event) {
 }
 
 function createFormDestCard(destination) {
+    const destinationLocation = destination.destination.split(',');
     formDestinationCard.innerHTML = `
-    <h3>${destination.destination}</h3>
+    <h3>${destinationLocation[0]}</h3>
+    <p class="country">${destinationLocation[1]}</p>
     <img class="form-dest-img" src="${destination.image}" alt="${destination.alt}">
     <p class="form-dest-text">Lodging: <span class="currency">${numberToDollar(destination.estimatedLodgingCostPerDay)}</span> per night </p>
     <p class="form-dest-text">Flight: <span class="currency">${numberToDollar(destination.estimatedFlightCostPerPerson)}</span> per person</p>
