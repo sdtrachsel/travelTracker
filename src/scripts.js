@@ -88,14 +88,15 @@ function userLogin() {
                 changePanel('viewHomeBtn', 'homeDisplay');
                 hide(loginDisplay);
                 show(displayArea);
+                clearLoginFields()
             })
             .catch(err => {
-                if (err === 422) {
-                    declareInvalidLogin();
-                } else {
-                    setFormFeedback(loginFeedback, 'other')
-                    clearLoginFields();
-                }
+                console.log(err.message)
+                if (err.message === '404') {
+                    setFormFeedback(loginFeedback, 'invalidLogin')
+                  } else {
+                    setFormFeedback(loginFeedback, 'other');
+                 }
             });
     }
 }
@@ -108,7 +109,7 @@ function getTravelerId(username) {
 
 function validateUserName(id) {
     if (!id) {
-        declareInvalidLogin();
+        setFormFeedback(loginFeedback, 'invalidLogin');
     } else {
         return true;
     }
@@ -116,7 +117,7 @@ function validateUserName(id) {
 
 function validatePassword(password) {
     if (password !== 'travel') {
-        declareInvalidLogin();
+        setFormFeedback(loginFeedback, 'invalidLogin');
     } else {
         return true;
     }
@@ -383,16 +384,6 @@ function closeConfirmation() {
     show(cancelTripBtn)
     hide(bookTripFormDisplay)
     show(displayArea)
-}
-///////////////////
-// change tab listners to a for each
-// clear innerHtml?
-
-
-/////////// new 
-function declareInvalidLogin(){
-    setFormFeedback(loginFeedback, 'invalidLogin')
-    clearLoginFields();
 }
 
 function validateDate() {
