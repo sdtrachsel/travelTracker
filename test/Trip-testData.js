@@ -317,6 +317,19 @@ const traveler44Pending = [
     }
 ];
 
+const traveler19Pending = [
+    {
+        "id": 16,
+        "userID": 19,
+        "destinationID": 27,
+        "travelers": 1,
+        "date": "2023/11/20",
+        "duration": 9,
+        "status": "pending",
+        "suggestedActivities": []
+    }
+];
+
 const traveler44Approved = [
     {
         "id": 20,
@@ -368,6 +381,161 @@ const traveler44Approved = [
         "status": "approved",
         "suggestedActivities": []
     }
+];
+
+const traveler19Approved = [
+    {
+        "id": 2,
+        "userID": 19,
+        "destinationID": 25,
+        "travelers": 5,
+        "date": "2022/10/04",
+        "duration": 18,
+        "status": "approved",
+        "suggestedActivities": []
+    },
+    {
+        "id": 18,
+        "userID": 19,
+        "destinationID": 2,
+        "travelers": 2,
+        "date": "2022/09/25",
+        "duration": 17,
+        "status": "approved",
+        "suggestedActivities": []
+    },
+    {
+        "id": 14,
+        "userID": 19,
+        "destinationID": 35,
+        "travelers": 1,
+        "date": "2022/09/24",
+        "duration": 10,
+        "status": "approved",
+        "suggestedActivities": []
+    }
+];
+
+const traveler19Past= [
+    {
+        id: 2,
+        userID: 19,
+        destinationID: 25,
+        travelers: 5,
+        date: '2022/10/04',
+        duration: 18,
+        status: 'approved',
+        suggestedActivities: []
+      },
+      {
+        id: 18,
+        userID: 19,
+        destinationID: 2,
+        travelers: 2,
+        date: '2022/09/25',
+        duration: 17,
+        status: 'approved',
+        suggestedActivities: []
+      },
+      {
+        id: 14,
+        userID: 19,
+        destinationID: 35,
+        travelers: 1,
+        date: '2022/09/24',
+        duration: 10,
+        status: 'approved',
+        suggestedActivities: []
+      }
+];
+
+const travler44Past =[
+    {
+        id: 20,
+        userID: 44,
+        destinationID: 19,
+        travelers: 4,
+        date: '2022/10/05',
+        duration: 6,
+        status: 'approved',
+        suggestedActivities: []
+      },
+      {
+        id: 1,
+        userID: 44,
+        destinationID: 49,
+        travelers: 1,
+        date: '2022/09/16',
+        duration: 8,
+        status: 'approved',
+        suggestedActivities: []
+      },
+      {
+        id: 6,
+        userID: 44,
+        destinationID: 35,
+        travelers: 3,
+        date: '2022/06/29',
+        duration: 9,
+        status: 'approved',
+        suggestedActivities: []
+      },
+      {
+        id: 3,
+        userID: 44,
+        destinationID: 22,
+        travelers: 4,
+        date: '2022/05/22',
+        duration: 17,
+        status: 'approved',
+        suggestedActivities: []
+      },
+      {
+        id: 13,
+        userID: 44,
+        destinationID: 12,
+        travelers: 1,
+        date: '2022/02/12',
+        duration: 11,
+        status: 'approved',
+        suggestedActivities: []
+      }
+];
+
+const travler19Upcoming = [
+    {
+        id: 16,
+        userID: 19,
+        destinationID: 27,
+        travelers: 1,
+        date: '2023/11/20',
+        duration: 9,
+        status: 'pending',
+        suggestedActivities: []
+      }
+];
+
+const traveler44Upcoming =[
+    {
+        id: 501,
+        userID: 44,
+        destinationID: 19,
+        travelers: 4,
+        date: '2023/08/05',
+        duration: 6,
+        status: 'pending',
+        suggestedActivities: []
+      },
+      {
+        id: 606,
+        userID: 44,
+        destinationID: 19,
+        travelers: 4,
+        date: '2023/09/05',
+        duration: 6,
+        status: 'pending',
+        suggestedActivities: []
+      }
 ];
 
 const traveler44AfterAdd = [
@@ -497,50 +665,4 @@ const traveler19Trips = [
    
 ]
 
-const traveler19Pending = [
-    {
-        "id": 16,
-        "userID": 19,
-        "destinationID": 27,
-        "travelers": 1,
-        "date": "2023/11/20",
-        "duration": 9,
-        "status": "pending",
-        "suggestedActivities": []
-    }
-];
-
-const traveler19Approved = [
-    {
-        "id": 2,
-        "userID": 19,
-        "destinationID": 25,
-        "travelers": 5,
-        "date": "2022/10/04",
-        "duration": 18,
-        "status": "approved",
-        "suggestedActivities": []
-    },
-    {
-        "id": 18,
-        "userID": 19,
-        "destinationID": 2,
-        "travelers": 2,
-        "date": "2022/09/25",
-        "duration": 17,
-        "status": "approved",
-        "suggestedActivities": []
-    },
-    {
-        "id": 14,
-        "userID": 19,
-        "destinationID": 35,
-        "travelers": 1,
-        "date": "2022/09/24",
-        "duration": 10,
-        "status": "approved",
-        "suggestedActivities": []
-    }
-];
-
-export { sampleTrips, traveler44Trips, traveler44Pending, traveler44Approved,traveler44AfterAdd, traveler19Trips, traveler19Pending, traveler19Approved };
+export { sampleTrips, traveler44Trips, traveler44Pending, traveler44Approved,traveler44AfterAdd, travler44Past, traveler44Upcoming, traveler19Trips, traveler19Pending, traveler19Approved, traveler19Past, travler19Upcoming };

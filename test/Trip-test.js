@@ -1,9 +1,21 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Trip from '../src/Trip'
-import { sampleTrips, traveler44Trips, traveler44Pending, traveler44Approved, traveler44AfterAdd, traveler19Trips, traveler19Pending, traveler19Approved } from './Trip-testData';
 import Destination from '../src/Destination';
 import sampleDestinations from './Destination-testData'
+import { sampleTrips, 
+        traveler44Trips, 
+        traveler44Pending, 
+        traveler44Approved,
+        traveler44AfterAdd, 
+        travler44Past, 
+        traveler44Upcoming, 
+        traveler19Trips, 
+        traveler19Pending, 
+        traveler19Approved, 
+        traveler19Past, 
+        travler19Upcoming  } from './Trip-testData';
+
 
 describe('Trip', function () {
     let tiffyTravelerInfo, tiffyTrip, hamTravelerInfo, hamTrip;
@@ -51,6 +63,16 @@ describe('Trip', function () {
         expect(tiffyTrip.findByStatus('approved')).to.deep.equal(traveler44Approved);
         expect(hamTrip.findByStatus('pending')).to.deep.equal(traveler19Pending);
         expect(hamTrip.findByStatus('approved')).to.deep.equal(traveler19Approved);
+    });
+
+    it('should find a list of trips that are is the past', function () {
+        expect(tiffyTrip.findByTense('past')).to.deep.equal(travler44Past);
+        expect(hamTrip.findByTense('past')).to.deep.equal(traveler19Past);
+    });
+
+    it('should find a list of trips that are upcoming', function () {
+        expect(tiffyTrip.findByTense('upcoming')).to.deep.equal(traveler44Upcoming);
+        expect(hamTrip.findByTense('upcoming')).to.deep.equal(travler19Upcoming );
     });
 
     it('should be able to add a new trip', function () {
