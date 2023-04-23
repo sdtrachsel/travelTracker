@@ -265,10 +265,17 @@ td {
 }
 
 .login-form fieldset {
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
+  margin-top: 2rem;
   padding: .75rem;
+  justify-content: center;
+}
+
+.login-row{
+  padding-bottom: .5rem;
+}
+
+.pw-label{
+  padding-right: 0.25rem;
 }
 
 input[type=password] {

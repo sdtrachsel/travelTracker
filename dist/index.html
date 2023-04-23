@@ -14,15 +14,20 @@
 
 <body>
   <section class="traveler-login" id="travelerLoginDisplay">
-    <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving" class="bottom-right larger" id="travelerLoginImage">
+    <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving"
+      class="bottom-right larger" id="travelerLoginImage">
     <section class="login-cont wrapper-two">
-     <form id="loginForm" class="login-form">
+      <form id="loginForm" class="login-form">
         <fieldset class="login-field">
           <legend>Login</legend>
-          <label for="username" >username:</label>
-          <input type="text" id="username" name="username" autocomplete="off">
-          <label for="password">password:</label>
-          <input type="password" id="password" name="password" autocomplete="off">
+          <div class="login-row">
+            <label for="username">username:</label>
+            <input type="text" id="username" name="username" autocomplete="off">
+          </div>
+          <div class="login-row">
+            <label class="pw-label" for="password">password:</label>
+            <input type="password" id="password" name="password" autocomplete="off">
+          </div>
           <input class="login-submit" type="submit" value="Submit">
           <p class="form-feedback" id="loginFeedback"></p>
         </fieldset>
@@ -30,7 +35,8 @@
     </section>
   </section>
   <section class="wrapper hidden" id="displayArea">
-    <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving" class="bottom-right larger" id="travelerImage">
+    <img src="./images/traveler-trimmed.png" alt="Purple car with luggage on top and cartoon kid driving"
+      class="bottom-right larger" id="travelerImage">
     <nav>
       <section class="profile">
         <img class="profile-icon" src="./images/user-profile.png" alt="user profile icon">
