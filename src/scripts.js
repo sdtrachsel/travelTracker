@@ -101,16 +101,21 @@ function userLogin() {
 }
 
 function getTravelerId(username) {
-    const travelerId = Number(username.slice(8));
+    if(username.startsWith('traveler')){
+        const travelerId = Number(username.slice(8));
+        return travelerId;
+    } else {
+        return false;
+    }
 
-    return travelerId;
+
 }
 
 function validateUserName(id) {
-    if (!id) {
-        setFormFeedback(loginFeedback, 'invalidLogin');
-    } else {
+    if (id) {
         return true;
+    } else {
+        setFormFeedback(loginFeedback, 'invalidLogin');
     }
 }
 
