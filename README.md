@@ -4,6 +4,7 @@
 Let's go on an adventure!! Login and see your upcoming adventures, past adventures, or book a a new one! Look through an extensive list of destinations and choose one you have never been or one you have already visited. After choosing, just select when you want to go, for how many days, and how many travelers then submit! Your new trip will show on your home page under upcoming adventures. 
 
 ## Application Preview
+![traveltracker-preview](https://user-images.githubusercontent.com/122052199/234037620-e571ed22-d86c-47b2-83b1-f555d482c2f5.gif)
 
 ## Installation Instructions
 ### Local Server
