@@ -107,8 +107,6 @@ function getTravelerId(username) {
     } else {
         return false;
     }
-
-
 }
 
 function validateUserName(id) {
@@ -128,8 +126,8 @@ function validatePassword(password) {
 }
 
 function clearLoginFields() {
-    clearFormField(userPassword)
-    clearFormField(username)
+    clearFormField(userPassword);
+    clearFormField(username);
 }
 
 function changePanel(targetId, panelId) {
@@ -150,7 +148,7 @@ function updateTabs(targetId) {
 }
 
 function updateTabPanels(panelId) {
-    const selectedPanel = document.getElementById(panelId)
+    const selectedPanel = document.getElementById(panelId);
     panel.forEach((page) => {
         page.hidden = true;
     })
@@ -166,32 +164,32 @@ function updateTabPanels(panelId) {
 
 function changeMainImage(size) {
     if (size === 'larger') {
-        mainImage.classList.remove('smaller')
+        mainImage.classList.remove('smaller');
     } else {
-        mainImage.classList.remove('larger')
+        mainImage.classList.remove('larger');
     }
-    mainImage.classList.add(size)
+    mainImage.classList.add(size);
 }
 
 function populateUponLogin() {
-    setText(loginName, currentUser.travelerName)
+    setText(loginName, currentUser.travelerName);
     populateHomePage();
     populatePastPage();
     populatePlanTripPage();
 }
 
 function populateHomePage() {
-    setText(userGreeting,`Welcome back ${currentUser.findFirstName()}!`)
+    setText(userGreeting,`Welcome back ${currentUser.findFirstName()}!`);
     createTripsTable(upComingTripTable, currentUserTrips.findByTense('upcoming'));
     updateAllTimeTripCost();
 }
 
 function populatePastPage() {
-    createTripsTable(pastTripTable, currentUserTrips.findByTense('past'))
+    createTripsTable(pastTripTable, currentUserTrips.findByTense('past'));
 }
 
 function populatePlanTripPage() {
-    createDestinationCards(allDestinations.allDestinations)
+    createDestinationCards(allDestinations.allDestinations);
     addBookBtnsListeners();
 }
 
@@ -225,7 +223,7 @@ function numberToDollar(num) {
     });
 
     const dollars = USDollar.format(num);
-    return dollars
+    return dollars;
 }
 
 function formatDateUser(apiDate) {
@@ -291,15 +289,15 @@ function clearForm(form){
 }
 
 function clearBookTripForm() {
-    clearForm(bookTripForm)
-    setText(formSubTotal, '')
+    clearForm(bookTripForm);
+    setText(formSubTotal, '');
    }
 
 function prePopulateForm(event) {
     const id = Number(event.target.id);
     const chosenDestination = allDestinations.findById(id);
-    setFormField(formDestinationId, id)
-    setFormField(formDestination, chosenDestination.destination)
+    setFormField(formDestinationId, id);
+    setFormField(formDestination, chosenDestination.destination);
     createFormDestCard(chosenDestination);
     setFormMinDate();
 }
@@ -307,12 +305,11 @@ function prePopulateForm(event) {
 function createFormDestCard(destination) {
     const destinationLocation = destination.destination.split(',');
     formDestinationCard.innerHTML = `
-    <h3>${destinationLocation[0]}</h3>
-    <p class="country">${destinationLocation[1]}</p>
-    <img class="form-dest-img" src="${destination.image}" alt="${destination.alt}">
-    <p class="form-dest-text">Lodging: <span class="currency">${numberToDollar(destination.estimatedLodgingCostPerDay)}</span> per night </p>
-    <p class="form-dest-text">Flight: <span class="currency">${numberToDollar(destination.estimatedFlightCostPerPerson)}</span> per person</p>
-    `;
+        <h3>${destinationLocation[0]}</h3>
+        <p class="country">${destinationLocation[1]}</p>
+        <img class="form-dest-img" src="${destination.image}" alt="${destination.alt}">
+        <p class="form-dest-text">Lodging: <span class="currency">${numberToDollar(destination.estimatedLodgingCostPerDay)}</span> per night </p>
+        <p class="form-dest-text">Flight: <span class="currency">${numberToDollar(destination.estimatedFlightCostPerPerson)}</span> per person</p>`;
 }
 
 function calculateSubtotal() {
@@ -322,7 +319,7 @@ function calculateSubtotal() {
     const subTotal = allDestinations.calculateDestinationCost(id, travelers, duration);
 
     if (subTotal && travelers > 0 && duration > 0) {
-        setText(formSubTotal, numberToDollar(subTotal))
+        setText(formSubTotal, numberToDollar(subTotal));
     }
 }
 
@@ -350,7 +347,7 @@ function submitTripForm() {
 
         post('trips', trip)
             .then((json) => {
-                currentUserTrips.addNewTrip(trip)
+                currentUserTrips.addNewTrip(trip);
                 declareTripBooked(trip);
                 createTripsTable(upComingTripTable, currentUserTrips.findByTense('upcoming'));
                 updateAllTimeTripCost();
@@ -376,12 +373,12 @@ function declareTripBooked(trip) {
 }
 
 function closeConfirmation() {
-    setText(formConfirmDest, '')
-    hide(formConfirmDisplay)
-    show(bookTripForm)
-    show(cancelTripBtn)
-    hide(bookTripFormDisplay)
-    show(displayArea)
+    setText(formConfirmDest, '');
+    hide(formConfirmDisplay);
+    show(bookTripForm);
+    show(cancelTripBtn);
+    hide(bookTripFormDisplay);
+    show(displayArea);
 }
 
 function validateDate() {
