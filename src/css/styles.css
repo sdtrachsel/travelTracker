@@ -51,6 +51,10 @@ h3 {
   margin-right: 5px;
 }
 
+.username{
+  font-size: .75rem;
+}
+
 nav {
   background-color: #e4be55;
   width: 20%;
@@ -121,8 +125,8 @@ main {
   width: 80%;
 }
 
-.table-container{
-  overflow-y:auto;
+.table-container {
+  overflow-y: auto;
   width: 75%;
   margin-bottom: 20px;
   scrollbar-color: #DB8592 #e4be55;
@@ -139,11 +143,11 @@ main {
   height: .5rem;
 }
 
-.up-cont{
+.up-cont {
   max-height: 8rem;
 }
 
-.past-cont{
+.past-cont {
   max-height: 16rem;
 }
 
@@ -161,7 +165,7 @@ th {
   font-size: 18px;
   text-align: center;
   position: sticky;
-  top:0
+  top: 0
 }
 
 td {
@@ -209,6 +213,19 @@ td {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+  scrollbar-color: #DB8592 #e4be55;
+}
+
+.destination-listings::-webkit-scrollbar {
+  border-radius: 5px;
+  background-color: transparent;
+  border: #DB8592 2px solid;
+}
+
+.destination-listings::-webkit-scrollbar-thumb {
+  background-color: #DB8592;
+  border-radius: 5px;
+  height: .5rem;
 }
 
 .dest-card {
@@ -294,11 +311,11 @@ td {
   justify-content: center;
 }
 
-.login-row{
+.login-row {
   padding-bottom: .5rem;
 }
 
-.pw-label{
+.pw-label {
   padding-right: 0.25rem;
 }
 
