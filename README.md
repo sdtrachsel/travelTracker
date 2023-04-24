@@ -33,3 +33,6 @@ This application was completed over 6 days for final project in Module 2(week 12
 - Accessbility tools: Lighthouse in Chrome, WAVE Chrome extension, Dalton Chrome Extenstion
 
 ## Wins + Challenges
+Wins in this project include properly implementing a Post with error handling, creating navigation tabs, and creating tested Classes to handle data provided from the API. 
+
+A major challenge was implementing the navigation tabs in a way to comply with WAI-ARIA guide. It required properly updating ARIA tags during user navigation.  
